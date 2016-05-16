@@ -45,7 +45,6 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:text="李宇" />
-
            <TextView
                android:layout_marginLeft="8dp"
                android:layout_marginTop="5dp"
@@ -55,8 +54,8 @@
                android:textColor="#bfbcbf"
                android:text="今天13:00" />
        </LinearLayout>
-
        <Button
+           
            android:layout_width="80dp"
            android:layout_height="35dp"
            android:layout_marginLeft="110dp"
@@ -64,7 +63,6 @@
            android:background="@drawable/raduio"
            android:text="接单" />
    </LinearLayout>
-   
    <TextView
        android:layout_width="match_parent"
        android:layout_height="0.1dp"
@@ -73,12 +71,13 @@
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="有没有人去主图馆帮忙换一本书咯"
+    android:text="有没有人去主图馆,帮忙归还一本书咯"
+    android:textSize="18sp"
     />
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="目标地址: 主图书馆"
+    android:text="目标地址:主图书馆"
     />
 <TextView
     android:layout_width="wrap_content"
