@@ -20,6 +20,7 @@ private TextView tv_order;
 		setContentView(R.layout.activity_order);
 	}
 	
-	}
+	
+}
 
 
