@@ -29,6 +29,9 @@ import android.widget.Toast;
 			{
 				Toast.makeText(RegisterActivity.this, "×¢²á³É¹¦", Toast.LENGTH_SHORT).show();
 			}
+			else if(msg.what==0x124){
+				Toast.makeText(RegisterActivity.this, "×¢²áÊ§°Ü", Toast.LENGTH_SHORT).show();
+			}
 		};
 	};
 	@Override
@@ -51,9 +54,9 @@ import android.widget.Toast;
 		public void onClick(View v) {
 			String sex = "f";
 			if(btnNan.isChecked()){
-				sex = "m";
+				sex = "ÄÐ";
 			}else if(btnNv.isChecked()){
-				sex = "w";
+				sex = "Å®";
 			}
 			final Map<String, Object> map = new HashMap<String, Object>();
 			map.put("name", editnickname.getText().toString());
@@ -61,10 +64,7 @@ import android.widget.Toast;
 			map.put("realname", editPhoneReadName.getText().toString());
 			map.put("stuNum", editPhoneStunum.getText().toString());
 			map.put("pwd", editPhonePassword.getText().toString());
-//				String  phoneNum = editPhoneNum.getText().toString();
-//				String  realName = editPhoneReadName.getText().toString();
-//				String  stuNum = editPhoneStunum.getText().toString();
-//				String  password = editPhonePassword.getText().toString();
+			map.put("sex",sex);
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -72,19 +72,22 @@ import android.widget.Toast;
 					System.out.println("data = " + data);
 					String jsonString = new String(data);
 					try {
+						
 						JSONObject jsonObject = new JSONObject(jsonString);
-						int code = jsonObject.getInt("resp_code");
-						if (code == 1) {
-							
-							
+						int code = jsonObject.getInt("code");
+						if (code ==0) {
+							System.out.println("01226454949494");
 							handler.sendEmptyMessage(0x123);
+						}
+						else if(code==11){
+							handler.sendEmptyMessage(0x124);
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
 				}
 			}).start();
-		}
-	});
+			}
+	   		});
 	}
 }

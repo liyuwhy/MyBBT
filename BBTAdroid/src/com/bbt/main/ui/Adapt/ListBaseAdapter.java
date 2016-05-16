@@ -25,6 +25,7 @@ public class ListBaseAdapter extends BaseAdapter{
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return list.size();
+		
 	}
 
 	@Override	
@@ -69,7 +70,6 @@ public class ListBaseAdapter extends BaseAdapter{
 //         map.put("fabu",fabu[i]);
 //         map.put("imageView",imageView3[i]);
 //         map.put("money",money[i]);
-		
 		Map<String,Object> data = (Map) getItem(position);
 		head.setImageResource((Integer) data.get("head"));
 		name.setText(list.get(position).get("personName").toString());

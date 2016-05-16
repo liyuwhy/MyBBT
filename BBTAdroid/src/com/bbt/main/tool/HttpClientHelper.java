@@ -182,6 +182,7 @@ public class HttpClientHelper {
 			System.out.println("dopost3");
 
 			if (httpResponse.getStatusLine().getStatusCode() == 200) {
+				System.out.println("dopost3");
 				HttpEntity httpEntity = httpResponse.getEntity();
 				return EntityUtils.toByteArray(httpEntity);
 			}

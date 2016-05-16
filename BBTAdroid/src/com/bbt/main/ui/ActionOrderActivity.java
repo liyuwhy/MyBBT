@@ -18,25 +18,18 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.PopupWindow;
-
 public class ActionOrderActivity extends Activity{
-	
 	public static final String TAG = "ActionOrderActivity";
-	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_action_order);
 	}
-	
-	
 	public void onCancelClick(View v){
 		log.d(TAG,"onOrderClick");
 		finish();
 	    overridePendingTransition(R.anim.no_push,R.anim.bottom_to_top);  
 	}
-	
 	public void onOrderBtn(View v){
 		log.d(TAG,"onOrderClick btn");
 		switch (v.getId()) {

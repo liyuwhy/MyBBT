@@ -3,8 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    
     <EditText 
         android:id="@+id/id_input_verifycode"
         android:layout_width="match_parent"
@@ -17,6 +15,4 @@
         android:layout_height="wrap_content"
         android:onClick="onClickView"
         android:text="验证"/>
-    
-
 </LinearLayout>

@@ -10,6 +10,7 @@ import com.bbt.main.bean.User;
 import com.bbt.main.tool.SPUtil;
 import com.bbt.main.ui.fragment.HomeFragment;
 import com.bbt.main.ui.fragment.MainFragment;
+import com.bbt.main.ui.fragment.PresentFragement;
 import com.bbt.main.view.CircleImageView;
 import com.bbt.main.view.SlidingMenu;
 import android.content.Intent;
@@ -37,13 +38,9 @@ public class MainActivity extends FragmentActivity {
 	private final int[] pressDrawable = new int[] { R.drawable.home_press, R.drawable.show_press, R.drawable.chat,
 			R.drawable.icon_time };
 	int currentFragment = 0;
-
 	private SlidingMenu mMenu;
-
 	private CircleImageView circleImgView;
-
 	private TextView txtName, txtPhonenumber;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,7 +49,6 @@ public class MainActivity extends FragmentActivity {
 		initView();
 		mMenu = (SlidingMenu) findViewById(R.id.id_menu_layout);
 		initFragment();
-
 		initUserInfo();
 		// 初始化默认图片
 		getDefaultImgHead();
@@ -72,7 +68,6 @@ public class MainActivity extends FragmentActivity {
 		txtName.setText(user.getRealname());
 		txtPhonenumber.setText(user.getPhoneNum());
 	}
-
 	private void getDefaultImgHead() {
 		// 创建okHttpClient对象
 		OkHttpClient mOkHttpClient = new OkHttpClient();
@@ -110,20 +105,16 @@ public class MainActivity extends FragmentActivity {
 			}
 		});
 	}
-
 	private void initView() {
 		Button btnHome = (Button) findViewById(R.id.id_btn_home);
 		Button btnNews = (Button) findViewById(R.id.id_btn_show);
 		Button btnShow = (Button) findViewById(R.id.id_btn_show);
 		Button btnTime = (Button) findViewById(R.id.id_btn_time);
 		btns = new Button[] { btnHome, btnNews, btnShow, btnTime };
-
 		circleImgView = (CircleImageView) findViewById(R.id.menu_circle_img);
-
 		txtName = (TextView) findViewById(R.id.menu_info_name);
 		txtPhonenumber = (TextView) findViewById(R.id.menu_info_phonenumber);
 	}
-
 	public void onMainClick(View v) {
 		Log.d(TAG, "+++onMainClick");
 		switch (v.getId()) {
@@ -156,32 +147,21 @@ public class MainActivity extends FragmentActivity {
 			break;
 		}
 	}
-
 	private void changeFragment(int which) {
 		Log.d(TAG, "onChangeFragment" + which);
 		getSupportFragmentManager().beginTransaction().hide(fragments[currentFragment]).show(fragments[which]).commit();
 		currentFragment = which;
-
 		btns[0].setBackgroundResource(R.drawable.home);
 		btns[1].setBackgroundResource(R.drawable.icon_show);
-
 		btns[which].setBackgroundResource(pressDrawable[which]);
-
 	}
-
 	private void initFragment() {
 		Bundle bundle = new Bundle();
-
 		Fragment fragment1 = new HomeFragment();
-
 		MainFragment fragment2 = new MainFragment(1);
-
-		MainFragment fragment3 = new MainFragment(2);
-
+		Fragment fragment3 = new PresentFragement();
 		MainFragment fragment4 = new MainFragment(3);
-
 		fragments = new Fragment[] { fragment1, fragment2, fragment3, fragment4 };
-
 		getSupportFragmentManager().beginTransaction().add(R.id.id_frame_layout, fragment1)
 				.add(R.id.id_frame_layout, fragment2).add(R.id.id_frame_layout, fragment3)
 				.add(R.id.id_frame_layout, fragment4).hide(fragment1).hide(fragment2).hide(fragment3).hide(fragment4)
