@@ -117,7 +117,33 @@ public class MainActivity extends FragmentActivity {
 	}
 	public void onMainClick(View v) {
 		Log.d(TAG, "+++onMainClick");
+		Intent intentTarget = new Intent();
 		switch (v.getId()) {
+		
+		case R.id.MyOrder:
+			intentTarget.setClass(this, Order_Activity.class);
+			startActivity(intentTarget);
+			break;
+		case R.id.Purse:
+			intentTarget.setClass(this, Purse_Activity.class);
+			startActivity(intentTarget);
+			break;
+		case R.id.MyCredibility:
+			intentTarget.setClass(this, Credibility_Activity.class);
+			startActivity(intentTarget);
+			break;
+		case R.id.About:
+			intentTarget.setClass(this, About_Activity.class);
+			startActivity(intentTarget);
+			break;
+		case R.id.HistoryRecord:
+			intentTarget.setClass(this, History_Activity.class);
+			startActivity(intentTarget);
+			break;
+		case R.id.Set:
+			intentTarget.setClass(this, Set_Activity.class);
+			startActivity(intentTarget);
+			break;
 		case R.id.id_btn_home:
 			changeFragment(0);
 			break;

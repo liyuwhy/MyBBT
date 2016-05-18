@@ -12,7 +12,7 @@
     <application
         android:name=".BBTApp"
         android:allowBackup="true"
-        android:icon="@drawable/logo"
+         android:icon="@drawable/logo_h"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Light.NoTitleBar"
         >
@@ -59,6 +59,40 @@
             android:name=".OrderActivity"
             android:label="@string/title_activity_order"
             android:theme="@android:style/Theme.Light.NoTitleBar"  >
+        </activity>
+        
+        
+                <!-- //侧滑 -->
+
+        <activity
+            android:name=".Order_Activity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".Purse_Activity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".Credibility_Activity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".About_Activity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".History_Activity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".Set_Activity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
     </application>
 </manifest>

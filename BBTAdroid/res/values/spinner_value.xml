@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        
+    <string-array name="str_array">
+        <item >三食堂</item>
+        <item>服务楼</item>
+    </string-array>
+    
+</resources>

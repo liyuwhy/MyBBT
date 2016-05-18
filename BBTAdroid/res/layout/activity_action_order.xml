@@ -10,15 +10,137 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:orientation="vertical"
         >
-       <Button 
-           android:id="@+id/order_btn"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="发单"
-           android:onClick="onOrderBtn"
-           />
+        
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/text_top"/>
+        
+        
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp">
+        
+        <LinearLayout 
+               android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/order_action_post"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:onClick="onOrderBtn"
+            >
+            
+            <ImageView 
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/order_type_post"/>
+            
+            <TextView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="寄取快递"/>
+            
+            
+        </LinearLayout>
+        
+        
+          <LinearLayout 
+               android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+            <ImageView 
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/order_type_rest"/>
+            
+            <TextView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="带食堂餐"/>
+            
+            
+        </LinearLayout>
+        
+          
+          
+             <LinearLayout 
+               android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+            <ImageView 
+             android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/order_type_lib"/>
+            
+            <TextView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="图书借还"/>
+            
+            
+        </LinearLayout>
+        </LinearLayout>
+        
+        
+        
+        
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+        
+        <LinearLayout 
+               android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+            <ImageView 
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/order_type_bi"/>
+            
+            <TextView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="学习互助"/>
+            
+            
+        </LinearLayout>
+        
+        
+          <LinearLayout 
+               android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+            <ImageView 
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/order_type_more"/>
+            
+            <TextView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="私人定制"/>
+            
+            
+        </LinearLayout>
+        </LinearLayout>
+        
+        
     </LinearLayout>
+    
+    
+    
+    
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@android:color/holo_orange_light"
@@ -26,13 +148,12 @@
         android:onClick="onCancelClick"
         android:gravity="center">
         
-        <Button android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <Button android:layout_width="30dp"
+            android:layout_height="30dp"
             android:gravity="center"
-            android:text="X"
             android:textColor="@android:color/white"
             android:textSize="30sp"
-            android:background="@android:color/transparent"
+            android:background="@drawable/icon_delete"
            />
     </LinearLayout>
     

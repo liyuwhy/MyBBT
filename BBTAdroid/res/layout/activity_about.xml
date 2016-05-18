@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    >
+    
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        >
+        
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:background="@drawable/back">
+            
+        </ImageView>
+
+    	<TextView
+    	    android:layout_width="116dp"
+    	    android:layout_height="match_parent"
+    	    android:gravity="center"
+    	    android:text="关于帮帮"
+    	    android:textSize="20sp" >
+        
+    	</TextView>
+	</LinearLayout>
+	
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:background="#99FFFF">
+    	
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:background="@drawable/concerning"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp">
+            
+        </ImageView>
+        
+        <TextView
+            android:layout_width="115dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:text="帮帮堂V1.1"
+            android:textSize="15sp" 
+            android:layout_marginLeft="20dp">
+            
+        </TextView>
+        
+    </LinearLayout>
+    
+    <View
+        android:layout_width="340dp"
+        android:layout_height="5dp"
+        android:background="#CCCCCC"
+        android:layout_marginLeft="10dp">
+        
+    </View>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        >
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户协议"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center">
+            
+        </TextView>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/go"
+            android:layout_marginLeft="250dp">
+            
+        </ImageView>
+        
+    </LinearLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#CCCCCC">
+        
+    </View>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        >
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="客服电话(免长途费)"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center">
+            
+        </TextView>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/go"
+            android:layout_marginLeft="155dp">
+            
+        </ImageView>
+        
+    </LinearLayout>
+    
+     <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#CCCCCC">
+        
+    </View>
+	
+  
+</LinearLayout>
