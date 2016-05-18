@@ -315,6 +315,19 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int hello_world=0x7f090001;
         public static final int title_activity_order=0x7f090002;
     }
+    public static final class style {
+        /** 
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    
+
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        
+         */
+        public static final int AppTheme=0x7f0a0000;
+    }
     public static final class styleable {
         /** Attributes that can be used with a CircleImageView.
            <p>Includes the following attributes:</p>
