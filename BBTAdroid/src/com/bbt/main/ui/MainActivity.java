@@ -12,7 +12,9 @@ import com.bbt.main.ui.fragment.HomeFragment;
 import com.bbt.main.ui.fragment.MainFragment;
 import com.bbt.main.ui.fragment.PresentFragement;
 import com.bbt.main.view.CircleImageView;
-import com.bbt.main.view.SlidingMenu;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,7 +27,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends FragmentActivity {
+
+
+public class MainActivity extends SlidingFragmentActivity {
 
 	public static final String TAG = "MainActivity";
 
@@ -38,16 +42,20 @@ public class MainActivity extends FragmentActivity {
 	private final int[] pressDrawable = new int[] { R.drawable.home_press, R.drawable.show_press, R.drawable.chat,
 			R.drawable.icon_time };
 	int currentFragment = 0;
-	private SlidingMenu mMenu;
+/*	private SlidingLayout mMenu;*/
 	private CircleImageView circleImgView;
 	private TextView txtName, txtPhonenumber;
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_test);
 
 		initView();
-		mMenu = (SlidingMenu) findViewById(R.id.id_menu_layout);
+		/*mMenu = (SlidingLayout) findViewById(R.id.id_menu_layout);
+		mMenu.setScrollEvent(findViewById(R.id.content));*/
+		initSlidingMenu(savedInstanceState);
+		
 		initFragment();
 		initUserInfo();
 		// 初始化默认图片
@@ -68,6 +76,40 @@ public class MainActivity extends FragmentActivity {
 		txtName.setText(user.getRealname());
 		txtPhonenumber.setText(user.getPhoneNum());
 	}
+	
+	
+	/**
+	 * 初始化侧边栏
+	 */
+	private void initSlidingMenu(Bundle savedInstanceState) {
+		
+		// 如果保存的状态不为空则得到之前保存的Fragment，否则实例化MyFragment
+			
+
+				// 设置左侧滑动菜单
+				setBehindContentView(R.layout.layout_menu);
+				
+
+				// 实例化滑动菜单对象
+				SlidingMenu sm = getSlidingMenu();
+				// 设置可以左右滑动的菜单
+				sm.setMode(SlidingMenu.LEFT);
+				// 设置滑动阴影的宽度
+				sm.setShadowWidthRes(R.dimen.shadow_width);
+				// 设置滑动菜单阴影的图像资源
+				sm.setShadowDrawable(null);
+				// 设置滑动菜单视图的宽度
+				sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+				// 设置渐入渐出效果的值
+				sm.setFadeDegree(0.35f);
+				
+				// 设置触摸屏幕的模式,这里设置为全屏
+				sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+				// 设置下方视图的在滚动时的缩放比例
+				sm.setBehindScrollScale(0.0f);
+		
+	}
+
 	private void getDefaultImgHead() {
 		// 创建okHttpClient对象
 		OkHttpClient mOkHttpClient = new OkHttpClient();
@@ -105,6 +147,7 @@ public class MainActivity extends FragmentActivity {
 			}
 		});
 	}
+
 	private void initView() {
 		Button btnHome = (Button) findViewById(R.id.id_btn_home);
 		Button btnNews = (Button) findViewById(R.id.id_btn_show);
@@ -115,11 +158,12 @@ public class MainActivity extends FragmentActivity {
 		txtName = (TextView) findViewById(R.id.menu_info_name);
 		txtPhonenumber = (TextView) findViewById(R.id.menu_info_phonenumber);
 	}
+
 	public void onMainClick(View v) {
 		Log.d(TAG, "+++onMainClick");
 		Intent intentTarget = new Intent();
 		switch (v.getId()) {
-		
+
 		case R.id.MyOrder:
 			intentTarget.setClass(this, Order_Activity.class);
 			startActivity(intentTarget);
@@ -173,6 +217,7 @@ public class MainActivity extends FragmentActivity {
 			break;
 		}
 	}
+
 	private void changeFragment(int which) {
 		Log.d(TAG, "onChangeFragment" + which);
 		getSupportFragmentManager().beginTransaction().hide(fragments[currentFragment]).show(fragments[which]).commit();
@@ -181,6 +226,7 @@ public class MainActivity extends FragmentActivity {
 		btns[1].setBackgroundResource(R.drawable.icon_show);
 		btns[which].setBackgroundResource(pressDrawable[which]);
 	}
+
 	private void initFragment() {
 		Bundle bundle = new Bundle();
 		Fragment fragment1 = new HomeFragment();
@@ -195,7 +241,8 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	public void toggleMenu(View view) {
-		mMenu.toggle();
+		// mMenu.toggle();
+		//mMenu.scrollToRightLayout();
 	}
 
 }

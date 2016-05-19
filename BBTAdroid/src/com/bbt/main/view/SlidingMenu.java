@@ -43,13 +43,13 @@ public class SlidingMenu extends HorizontalScrollView {
 		int n = a.getIndexCount();
 		for (int i = 0; i < n; i++) {
 			int attr = a.getIndex(i);
-			switch (attr) {
+			/*switch (attr) {
 			case R.styleable.SlidingMenu_rightPadding:
 				// Ä¬ÈÏ50
 				mMenuRightPadding = a.getDimensionPixelSize(attr, (int) TypedValue
 						.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50f, getResources().getDisplayMetrics()));// Ä¬ÈÏÎª10DP
 				break;
-			}
+			}*/
 		}
 		a.recycle();
 	}
