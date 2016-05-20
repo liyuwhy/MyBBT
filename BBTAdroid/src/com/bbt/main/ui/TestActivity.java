@@ -18,7 +18,7 @@ public class TestActivity extends FragmentActivity{
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.test_activity);
-		DataToVOS.testGet(new SignUpCallback() {
+	/*	DataToVOS.testGet(new SignUpCallback() {
 			
 			@Override
 			public void done(AVException e) {
@@ -29,7 +29,7 @@ public class TestActivity extends FragmentActivity{
 	                 Toast.makeText(TestActivity.this, "∑¢ÀÕ—È÷§ ß∞‹", 1000*5).show();
 	             }
 			}
-		});
+		});*/
 	}
 	
 	
