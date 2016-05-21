@@ -75,7 +75,7 @@ public class ListBaseAdapter extends BaseAdapter{
 		name.setText(list.get(position).get("personName").toString());
 		time.setText(list.get(position).get("time").toString());
 		descs.setText(list.get(position).get("desc").toString());
-		 xian.setImageResource((Integer) list.get(position).get("xian"));
+		// xian.setImageResource((Integer) list.get(position).get("xian"));
 		 school.setText(list.get(position).get("school").toString());
 		 pao.setImageResource((Integer) list.get(position).get("pao"));
 		 fabu.setText(list.get(position).get("fabu").toString());

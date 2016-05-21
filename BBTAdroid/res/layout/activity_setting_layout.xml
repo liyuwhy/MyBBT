@@ -40,7 +40,7 @@
              android:layout_height="100dp"
              android:clickable="true"
              android:onClick="onChangeClick"
-             android:background="@drawable/icon_show"/>
+             android:background="@drawable/icon_show_normal"/>
         
          
      </LinearLayout>

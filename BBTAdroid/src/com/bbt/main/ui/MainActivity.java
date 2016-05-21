@@ -37,10 +37,10 @@ public class MainActivity extends SlidingFragmentActivity {
 
 	private Fragment[] fragments;
 	private Button[] btns;
-	private final int[] normalDrawable = new int[] { R.drawable.home, R.drawable.icon_show, R.drawable.chat,
-			R.drawable.icon_time };
-	private final int[] pressDrawable = new int[] { R.drawable.home_press, R.drawable.show_press, R.drawable.chat,
-			R.drawable.icon_time };
+	private final int[] normalDrawable = new int[] { R.drawable.icon_home_normal, R.drawable.icon_show_normal, R.drawable.icon_message_normal,
+			R.drawable.icon_doing_normal };
+	private final int[] pressDrawable = new int[] { R.drawable.icon_home_press, R.drawable.icon_show_press, R.drawable.icon_message_press,
+			R.drawable.icon_doing_press };
 	int currentFragment = 0;
 	/* private SlidingLayout mMenu; */
 	private CircleImageView circleImgView;
@@ -52,7 +52,7 @@ public class MainActivity extends SlidingFragmentActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main_test);
+		setContentView(R.layout.activity_main_show);
 
 		initView();
 		/*
@@ -152,8 +152,8 @@ public class MainActivity extends SlidingFragmentActivity {
 	private void initView() {
 		Button btnHome = (Button) findViewById(R.id.id_btn_home);
 		Button btnNews = (Button) findViewById(R.id.id_btn_show);
-		Button btnShow = (Button) findViewById(R.id.id_btn_show);
-		Button btnTime = (Button) findViewById(R.id.id_btn_time);
+		Button btnShow = (Button) findViewById(R.id.id_btn_message);
+		Button btnTime = (Button) findViewById(R.id.id_btn_doing);
 		btns = new Button[] { btnHome, btnNews, btnShow, btnTime };
 		circleImgView = (CircleImageView) findViewById(R.id.menu_circle_img);
 		txtName = (TextView) findViewById(R.id.menu_info_name);
@@ -195,10 +195,10 @@ public class MainActivity extends SlidingFragmentActivity {
 		case R.id.id_btn_show:
 			changeFragment(1);
 			break;
-		case R.id.id_btn_time:
+		case R.id.id_btn_message:
 			changeFragment(2);
 			break;
-		case R.id.id_btn_news:
+		case R.id.id_btn_doing:
 			changeFragment(3);
 			break;
 		// 点击发订单 -- 从下面滑动出来界面
@@ -223,8 +223,11 @@ public class MainActivity extends SlidingFragmentActivity {
 		Log.d(TAG, "onChangeFragment" + which);
 		getSupportFragmentManager().beginTransaction().hide(fragments[currentFragment]).show(fragments[which]).commit();
 		currentFragment = which;
-		btns[0].setBackgroundResource(R.drawable.home);
-		btns[1].setBackgroundResource(R.drawable.icon_show);
+		btns[0].setBackgroundResource(normalDrawable[0]);
+		btns[1].setBackgroundResource(normalDrawable[1]);
+		btns[2].setBackgroundResource(normalDrawable[2]);
+		btns[3].setBackgroundResource(normalDrawable[3]);
+		
 		btns[which].setBackgroundResource(pressDrawable[which]);
 	}
 
