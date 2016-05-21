@@ -27,13 +27,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-
 public class MainActivity extends SlidingFragmentActivity {
 
 	public static final String TAG = "MainActivity";
 
 	public static final String PARAM_FRAGMENT = "param_fragmennt";
+
+	private static final String KEY_INDEX = "KEY_INDEX";
 
 	private Fragment[] fragments;
 	private Button[] btns;
@@ -42,9 +42,12 @@ public class MainActivity extends SlidingFragmentActivity {
 	private final int[] pressDrawable = new int[] { R.drawable.home_press, R.drawable.show_press, R.drawable.chat,
 			R.drawable.icon_time };
 	int currentFragment = 0;
-/*	private SlidingLayout mMenu;*/
+	/* private SlidingLayout mMenu; */
 	private CircleImageView circleImgView;
 	private TextView txtName, txtPhonenumber;
+
+	private SlidingMenu mSlidingMenu;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,14 +55,16 @@ public class MainActivity extends SlidingFragmentActivity {
 		setContentView(R.layout.activity_main_test);
 
 		initView();
-		/*mMenu = (SlidingLayout) findViewById(R.id.id_menu_layout);
-		mMenu.setScrollEvent(findViewById(R.id.content));*/
+		/*
+		 * mMenu = (SlidingLayout) findViewById(R.id.id_menu_layout);
+		 * mMenu.setScrollEvent(findViewById(R.id.content));
+		 */
 		initSlidingMenu(savedInstanceState);
-		
-		initFragment();
+
+		initFragment(savedInstanceState);
 		initUserInfo();
 		// 初始化默认图片
-		getDefaultImgHead();
+		//getDefaultImgHead();
 	}
 
 	@Override
@@ -76,38 +81,34 @@ public class MainActivity extends SlidingFragmentActivity {
 		txtName.setText(user.getRealname());
 		txtPhonenumber.setText(user.getPhoneNum());
 	}
-	
-	
+
 	/**
 	 * 初始化侧边栏
 	 */
 	private void initSlidingMenu(Bundle savedInstanceState) {
-		
+
 		// 如果保存的状态不为空则得到之前保存的Fragment，否则实例化MyFragment
-			
 
-				// 设置左侧滑动菜单
-				setBehindContentView(R.layout.layout_menu);
-				
-
-				// 实例化滑动菜单对象
-				SlidingMenu sm = getSlidingMenu();
-				// 设置可以左右滑动的菜单
-				sm.setMode(SlidingMenu.LEFT);
-				// 设置滑动阴影的宽度
-				sm.setShadowWidthRes(R.dimen.shadow_width);
-				// 设置滑动菜单阴影的图像资源
-				sm.setShadowDrawable(null);
-				// 设置滑动菜单视图的宽度
-				sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-				// 设置渐入渐出效果的值
-				sm.setFadeDegree(0.35f);
-				
-				// 设置触摸屏幕的模式,这里设置为全屏
-				sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-				// 设置下方视图的在滚动时的缩放比例
-				sm.setBehindScrollScale(0.0f);
+		// 设置左侧滑动菜单
+		setBehindContentView(R.layout.layout_menu);
 		
+		mSlidingMenu = getSlidingMenu();
+		// 设置可以左右滑动的菜单
+		mSlidingMenu.setMode(SlidingMenu.LEFT);
+		// 设置滑动阴影的宽度
+		mSlidingMenu.setShadowWidthRes(R.dimen.shadow_width);
+		// 设置滑动菜单阴影的图像资源
+		mSlidingMenu.setShadowDrawable(null);
+		// 设置滑动菜单视图的宽度
+		mSlidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+		// 设置渐入渐出效果的值
+		mSlidingMenu.setFadeDegree(0.35f);
+		mSlidingMenu.setAnimation(null);
+		// 设置触摸屏幕的模式,这里设置为全屏
+		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+		// 设置下方视图的在滚动时的缩放比例
+		mSlidingMenu.setBehindScrollScale(0.0f);
+
 	}
 
 	private void getDefaultImgHead() {
@@ -227,22 +228,60 @@ public class MainActivity extends SlidingFragmentActivity {
 		btns[which].setBackgroundResource(pressDrawable[which]);
 	}
 
-	private void initFragment() {
-		Bundle bundle = new Bundle();
-		Fragment fragment1 = new HomeFragment();
-		MainFragment fragment2 = new MainFragment(1);
-		Fragment fragment3 = new PresentFragement();
-		MainFragment fragment4 = new MainFragment(3);
-		fragments = new Fragment[] { fragment1, fragment2, fragment3, fragment4 };
-		getSupportFragmentManager().beginTransaction().add(R.id.id_frame_layout, fragment1)
-				.add(R.id.id_frame_layout, fragment2).add(R.id.id_frame_layout, fragment3)
-				.add(R.id.id_frame_layout, fragment4).hide(fragment1).hide(fragment2).hide(fragment3).hide(fragment4)
-				.show(fragment2).commit();
+	private void initFragment(Bundle savedInstanceState) {
+		
+		
+		if( savedInstanceState != null){
+			
+			fragments[0] = getSupportFragmentManager().findFragmentByTag(fragments[0].getClass().getName());
+			fragments[1] = getSupportFragmentManager().findFragmentByTag(fragments[1].getClass().getName());
+			fragments[2] = getSupportFragmentManager().findFragmentByTag(fragments[2].getClass().getName());
+			fragments[3] = getSupportFragmentManager().findFragmentByTag(fragments[3].getClass().getName());
+			
+			currentFragment = savedInstanceState.getInt(KEY_INDEX);
+			
+			 getSupportFragmentManager().beginTransaction()
+			 .hide(fragments[0]).hide(fragments[1]).hide(fragments[2]).hide(fragments[3])
+			 .show(fragments[currentFragment]);
+			
+		}else{
+			
+			Bundle bundle = new Bundle();
+			Fragment fragment1 = HomeFragment.newInstance();
+			MainFragment fragment2 = new MainFragment(1);
+			Fragment fragment3 = new PresentFragement();
+			MainFragment fragment4 = new MainFragment(3);
+			fragments = new Fragment[] { fragment1, fragment2, fragment3, fragment4 };
+			getSupportFragmentManager().beginTransaction()
+			.add(R.id.id_frame_layout, fragments[0],fragments[0].getClass().getName())
+		    .add(R.id.id_frame_layout, fragments[1],fragments[1].getClass().getName())
+		    .add(R.id.id_frame_layout, fragments[2],fragments[2].getClass().getName())
+		    .add(R.id.id_frame_layout, fragments[3],fragments[3].getClass().getName())
+		    .hide(fragments[0])
+		    .hide(fragments[1])
+		    .hide(fragments[2])
+		    .hide(fragments[3])
+			.show(fragments[0]).commit();
+			
+		}
 	}
+	
+	
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(KEY_INDEX, currentFragment);
+	}
+	
+	
 
 	public void toggleMenu(View view) {
+
+		mSlidingMenu.toggle(false);
+
 		// mMenu.toggle();
-		//mMenu.scrollToRightLayout();
+		// mMenu.scrollToRightLayout();
 	}
 
 }

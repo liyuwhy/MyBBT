@@ -1,4 +1,4 @@
-package com.bbt.main.ui;
+package com.bbt.main.base;
 
 import com.avos.avoscloud.AVOSCloud;
 

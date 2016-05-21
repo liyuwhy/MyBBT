@@ -25,15 +25,25 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bbt.main.base.BaseFragment;
 import com.bbt.main.ui.OrderdetailsActivity;
 import com.bbt.main.ui.R;
 import com.bbt.main.ui.Adapt.ListBaseAdapter;
 import com.bbt.main.ui.Adapt.ViewPagerAdapter;
 public class HomeFragment extends BaseFragment implements OnItemClickListener {
+	
+	
+	
+	
+	public static HomeFragment newInstance(){
+		return new HomeFragment();
+	}
+	
+	
+	
 	private ListBaseAdapter adapter1;
 	private ListView listv;
-	private Context context;
-	private View mBaseView;
+
 	private List<Map<String, Object>> list;
 	private ViewPager mViewPaper;
 	private List<ImageView> images;
@@ -42,8 +52,8 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener {
 	// 记录上一次点的位置
 	private int oldPosition = 0;
 	// 存放图片的id
-	private int[] imageIds = new int[] { R.drawable.thumb_raw_1459858925, R.drawable.thumb_raw_1459859301,
-			R.drawable.thumb_raw_1459860103 };
+	private int[] imageIds = new int[] { R.drawable.ad_top_c, R.drawable.ad_top_o,
+			R.drawable.ad_top_t };
 	private String names[] = new String[] { "珠珠", "林茜", "李欣书", "yoho" };
 	private String time[] = new String[] { "21分钟前", "41分钟前", "1个小时前", "2个小时前" };
 	private String descs[] = new String[] { "[峰达达]快递编号（*码*）中通快递，民族大学西门右走30米时尚丛林店内取", "中通快递", "小东门取快递", "【快递信】关注微信。。" };
@@ -58,23 +68,45 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener {
 	private TextView title1;
 	private ViewPagerAdapter adapter;
 	private ScheduledExecutorService scheduledExecutorService;
+	
+	
+
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		context = getActivity();
-		mBaseView = inflater.inflate(R.layout.fragment_home, null);
-		super.onCreateView(inflater, container, savedInstanceState);
-		setData();
-		findView();
+	protected int getLayoutId() {
+		return R.layout.fragment_home;
+	}
+	
+	
+	@Override
+	protected void initView(View view, Bundle saveInstanceState) {
+		
+	
+		mViewPaper = (ViewPager) view.findViewById(R.id.vp);
+		// 显示的小点
+		dots = new ArrayList<View>();
+		dots.add(view.findViewById(R.id.dot_0));
+		dots.add(view.findViewById(R.id.dot_1));
+		dots.add(view.findViewById(R.id.dot_2));
+		
+		// 初始化 imgs
+		init();
+		adapter = new ViewPagerAdapter(images);
+		mViewPaper.setAdapter(adapter);
+		setListener();
+	/*	scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+		scheduledExecutorService.scheduleWithFixedDelay(new ViewPageTask(), 4, 3, TimeUnit.SECONDS);
+		
+		*/
+		
+		initData();
+		listv = (ListView) view.findViewById(R.id.myfirstpager_list);
 		adapter1 = new ListBaseAdapter(list);
 		listv.setAdapter(adapter1);
 		listv.setOnItemClickListener(this);
-		adapter = new ViewPagerAdapter(images);
-		mViewPaper.setAdapter(adapter);
-		scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-		scheduledExecutorService.scheduleWithFixedDelay(new ViewPageTask(), 4, 3, TimeUnit.SECONDS);
-		return mBaseView;
+		
 	}
-	private void setData() {
+	
+	private void initData() {
 		// 实例化集合
 		list = new ArrayList<Map<String, Object>>();
 		for (int i = 0; i < names.length; i++) {
@@ -102,14 +134,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener {
 	/**
 	 * 利用线程池定时执行动画轮播
 	 */
-//	public void onStart() {
-//		// TODO Auto-generated method stub
-//		super.onStart();
-//		if(scheduledExecutorService!=null)
-//			scheduledExecutorService.shutdownNow();
-//		scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-//		scheduledExecutorService.scheduleWithFixedDelay(new ViewPageTask(), 4, 3, TimeUnit.SECONDS);
-//	}
+
 	private class ViewPageTask implements Runnable {
 
 		@Override
@@ -126,19 +151,9 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener {
 			mViewPaper.setCurrentItem(currentItem);
 		};
 	};
-	@Override
-	protected void findView() {
-		mViewPaper = (ViewPager) mBaseView.findViewById(R.id.vp);
-		listv = (ListView) mBaseView.findViewById(R.id.myfirstpager_list);
 
-		// 显示的小点
-		dots = new ArrayList<View>();
-		dots.add(mBaseView.findViewById(R.id.dot_0));
-		dots.add(mBaseView.findViewById(R.id.dot_1));
-		dots.add(mBaseView.findViewById(R.id.dot_2));
-	}
 
-	@Override
+
 	protected void setListener() {
 
 		// IV_title_stuSquarebtn_left.setOnClickListener(this);
@@ -165,38 +180,19 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener {
 
 	}
 
-	@Override
 	protected void init() {
 		// 显示的图片
 		images = new ArrayList<ImageView>();
 		for (int i = 0; i < imageIds.length; i++) {
-			ImageView imageView = new ImageView(context);
+			ImageView imageView = new ImageView(getHoldingActivity());
 			imageView.setBackgroundResource(imageIds[i]);
 			images.add(imageView);
 		}
 		// 设置图片标题
 		// title.setText(titles[0]);
 	}
-//	public void onClick(View view) {
-//
-//		int Id = view.getId();
-//		FragmentManager fm;
-//		FragmentTransaction ft;
-//		Bundle bundle = new Bundle();
-//		Intent intent;
-//
-//	}
-//	map.put("head", imageView[i]);
-//	map.put("personName", names[i]);
-//	map.put("time", time[i]);
-//	map.put("image", imageView1[i]);
-//	map.put("desc", descs[i]);
-//	map.put("xian", imageView2[i]);
-//	map.put("school", school[i]);
-//	map.put("pao", pao[i]);
-//	map.put("fabu", fabu[i]);
-//	map.put("imageView", imageView3[i]);
-//	map.put("money", money[i]);
+	
+
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 		// TODO Auto-generated method stub
