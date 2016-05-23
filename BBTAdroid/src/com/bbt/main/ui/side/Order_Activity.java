@@ -1,9 +1,14 @@
-package com.bbt.main.ui;
+package com.bbt.main.ui.side;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import com.bbt.main.ui.R;
+import com.bbt.main.ui.R.array;
+import com.bbt.main.ui.R.id;
+import com.bbt.main.ui.R.layout;
 
 import android.app.Activity;
 import android.os.Bundle;

@@ -12,6 +12,13 @@ import com.bbt.main.tool.SPUtil;
 import com.bbt.main.ui.fragment.HomeFragment;
 import com.bbt.main.ui.fragment.MainFragment;
 import com.bbt.main.ui.fragment.PresentFragement;
+import com.bbt.main.ui.side.About_Activity;
+import com.bbt.main.ui.side.Credibility_Activity;
+import com.bbt.main.ui.side.History_Activity;
+import com.bbt.main.ui.side.LoginActivity;
+import com.bbt.main.ui.side.Order_Activity;
+import com.bbt.main.ui.side.Purse_Activity;
+import com.bbt.main.ui.side.SettingActivity;
 import com.bbt.main.view.CircleImageView;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -202,7 +209,7 @@ public class MainActivity extends SlidingFragmentActivity {
 			startActivity(intentTarget);
 			break;
 		case R.id.Set:
-			intentTarget.setClass(this, Set_Activity.class);
+			intentTarget.setClass(this, SettingActivity.class);
 			startActivity(intentTarget);
 			break;
 		case R.id.id_btn_home:

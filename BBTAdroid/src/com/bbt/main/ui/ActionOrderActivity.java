@@ -24,9 +24,26 @@ public class ActionOrderActivity extends Activity {
 
 	public void onOrderBtn(View v) {
 		log.d(TAG, "onOrderClick btn");
+		Intent intent = new Intent(this, OrderActivity.class);
 		switch (v.getId()) {
 		case R.id.order_action_post:
-			Intent intent = new Intent(this, OrderActivity.class);
+			intent.putExtra(OrderActivity.KEY_ORDER_TYPE,"" );
+			startActivity(intent);
+			break;
+		case R.id.order_action_library:
+			intent.putExtra(OrderActivity.KEY_ORDER_TYPE,"" );
+			startActivity(intent);
+			break;
+		case R.id.order_action_resturant:
+			intent.putExtra(OrderActivity.KEY_ORDER_TYPE,"" );
+			startActivity(intent);
+			break;
+		case R.id.order_action_teach:
+			intent.putExtra(OrderActivity.KEY_ORDER_TYPE,"" );
+			startActivity(intent);
+			break;
+		case R.id.order_action_myself:
+			intent.putExtra(OrderActivity.KEY_ORDER_TYPE,"" );
 			startActivity(intent);
 			break;
 		default:

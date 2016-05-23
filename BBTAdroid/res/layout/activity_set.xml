@@ -38,18 +38,15 @@
         android:orientation="vertical" >
 
         <ImageView
+            android:id="@+id/setting_id_head"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:background="@drawable/head" 
+            android:onClick="onChangeClick"
             android:layout_gravity="center">
         </ImageView>
 
-        <Button
-            android:layout_width="148dp"
-            android:layout_height="40dp"
-            android:text="点击修改头像" 
-            android:layout_gravity="center">
-		</Button>
+      
     </LinearLayout>
      	<View
         android:layout_width="match_parent"

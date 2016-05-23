@@ -49,9 +49,12 @@
         
         
           <LinearLayout 
+              android:id="@+id/order_action_resturant"
                android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="onOrderBtn"
             android:orientation="vertical">
             
             <ImageView 
@@ -70,9 +73,12 @@
           
           
              <LinearLayout 
+                  android:id="@+id/order_action_library"
                android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="onOrderBtn"
             android:orientation="vertical">
             
             <ImageView 
@@ -92,7 +98,10 @@
         
         
         
-        <LinearLayout android:layout_width="match_parent"
+        <LinearLayout
+            android:clickable="true"
+            android:onClick="onOrderBtn"
+             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">
@@ -100,11 +109,13 @@
         <LinearLayout 
                android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+               android:id="@+id/order_action_teach"
             android:orientation="vertical">
             
             <ImageView 
             android:layout_width="100dp"
             android:layout_height="100dp"
+            
             android:background="@drawable/order_type_bi"/>
             
             <TextView android:layout_width="match_parent"
@@ -117,8 +128,11 @@
         
         
           <LinearLayout 
+               android:id="@+id/order_action_myself"
                android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+              android:clickable="true"
+            android:onClick="onOrderBtn"
             android:orientation="vertical">
             
             <ImageView 
@@ -130,7 +144,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="私人定制"/>
-            
             
         </LinearLayout>
         </LinearLayout>

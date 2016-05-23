@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Base64;
+import android.util.Log;
 
 public class PictureUtil {
 
@@ -121,6 +122,7 @@ public class PictureUtil {
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
+		Log.d("TAG", "directory"+dir.getAbsolutePath());
 		return dir;
 	}
 

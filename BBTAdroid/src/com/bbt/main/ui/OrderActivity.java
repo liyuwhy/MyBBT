@@ -29,6 +29,11 @@ import android.widget.Toast;
 
 public class OrderActivity extends Activity {
 
+	
+	public static final String KEY_ORDER_TYPE = "order_type";
+	
+	
+	
 	Button submitBtn;
 	EditText contentEdit, addressEdit, moneyEdit;
 	TextView dataTxt, timeTxt, nameTxt, phoneTxt;
@@ -45,6 +50,8 @@ public class OrderActivity extends Activity {
 		setContentView(R.layout.activity_order);
 		initView();
 		new ActionBarBuilder(this).setTitleText("·¢²¼¶©µ¥");
+		
+		String type = getIntent().getStringExtra(KEY_ORDER_TYPE);
 	}
 
 	@SuppressLint("SimpleDateFormat")

@@ -1,6 +1,11 @@
-package com.bbt.main.ui;
+package com.bbt.main.ui.side;
 
 import android.os.Bundle;
+
+import com.bbt.main.ui.R;
+import com.bbt.main.ui.R.id;
+import com.bbt.main.ui.R.layout;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
@@ -77,7 +82,7 @@ public class Personal_Activity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				Intent i=new Intent(Personal_Activity.this,Set_Activity.class);
+				Intent i=new Intent(Personal_Activity.this,SettingActivity.class);
 				startActivity(i);
 			}
 		});

@@ -1,4 +1,7 @@
-package com.bbt.main.ui;
+package com.bbt.main.ui.side;
+
+import com.bbt.main.ui.R;
+import com.bbt.main.ui.R.layout;
 
 import android.app.Activity;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.bbt.main.ui;
+package com.bbt.main.ui.side;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +13,9 @@ import com.bbt.main.bean.User;
 import com.bbt.main.dao.UserDao;
 import com.bbt.main.tool.HttpClientHelper;
 import com.bbt.main.tool.SPUtil;
+import com.bbt.main.ui.R;
+import com.bbt.main.ui.R.id;
+import com.bbt.main.ui.R.layout;
 
 import android.app.Activity;
 import android.content.Intent;
