@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
    
+    
+    <color name="text_an">#8B8B8B</color>
+    <color name="text_light">#8BC34A</color>
+    
     <color name="blue">#499BF7</color>
     <color name="whites">#ffffff</color>
     <color name="grays">#818181</color>

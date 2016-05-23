@@ -37,6 +37,7 @@ public class MainActivity extends SlidingFragmentActivity {
 
 	private Fragment[] fragments;
 	private Button[] btns;
+	private TextView[] txts;
 	private final int[] normalDrawable = new int[] { R.drawable.icon_home_normal, R.drawable.icon_show_normal, R.drawable.icon_message_normal,
 			R.drawable.icon_doing_normal };
 	private final int[] pressDrawable = new int[] { R.drawable.icon_home_press, R.drawable.icon_show_press, R.drawable.icon_message_press,
@@ -46,7 +47,11 @@ public class MainActivity extends SlidingFragmentActivity {
 	private CircleImageView circleImgView;
 	private TextView txtName, txtPhonenumber;
 
+	
+
 	private SlidingMenu mSlidingMenu;
+
+	private int textColorAn,textColorLight;
 
 
 	@Override
@@ -158,6 +163,15 @@ public class MainActivity extends SlidingFragmentActivity {
 		circleImgView = (CircleImageView) findViewById(R.id.menu_circle_img);
 		txtName = (TextView) findViewById(R.id.menu_info_name);
 		txtPhonenumber = (TextView) findViewById(R.id.menu_info_phonenumber);
+		
+		txts = new TextView[4];
+		txts[0] = (TextView) findViewById(R.id.id_txt_home);
+		txts[1] = (TextView) findViewById(R.id.id_txt_show);
+		txts[2] = (TextView) findViewById(R.id.id_txt_message);
+		txts[3] = (TextView) findViewById(R.id.id_txt_doing);
+		
+		textColorAn = getResources().getColor(R.color.text_an);
+		 textColorLight = getResources().getColor(R.color.text_light);
 	}
 
 	public void onMainClick(View v) {
@@ -223,12 +237,16 @@ public class MainActivity extends SlidingFragmentActivity {
 		Log.d(TAG, "onChangeFragment" + which);
 		getSupportFragmentManager().beginTransaction().hide(fragments[currentFragment]).show(fragments[which]).commit();
 		currentFragment = which;
-		btns[0].setBackgroundResource(normalDrawable[0]);
-		btns[1].setBackgroundResource(normalDrawable[1]);
-		btns[2].setBackgroundResource(normalDrawable[2]);
-		btns[3].setBackgroundResource(normalDrawable[3]);
+		
+		for(int i=0;i<4;i++){
+			btns[i].setBackgroundResource(normalDrawable[i]);
+			txts[i].setTextColor(textColorAn);
+		}
 		
 		btns[which].setBackgroundResource(pressDrawable[which]);
+        txts[which].setTextColor(textColorLight);		
+		
+		
 	}
 
 	private void initFragment(Bundle savedInstanceState) {

@@ -61,6 +61,7 @@
                 android:onClick="onMainClick" />
 
             <TextView
+                android:id="@+id/id_txt_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="主页"
@@ -82,6 +83,7 @@
                 android:onClick="onMainClick" />
 
             <TextView
+                android:id="@+id/id_txt_show"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="帮帮秀" />
@@ -117,6 +119,7 @@
                 android:onClick="onMainClick" />
 
             <TextView
+                android:id="@+id/id_txt_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="消息" />
@@ -137,6 +140,7 @@
                 android:onClick="onMainClick" />
 
             <TextView
+                android:id="@+id/id_txt_doing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="进行中" />
