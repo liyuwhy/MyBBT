@@ -5,60 +5,33 @@
     android:orientation="vertical"
     tools:context=".LoginActivity" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="#8bc34a"
-        android:padding="5dp" >
-
-        <Button
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/back"
-            android:onClick="onBackClick" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="主页"
-            android:textColor="@android:color/white"
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/release"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:gravity="center"
-            android:text="发布"
-            android:textColor="@android:color/white"
-            android:textSize="15sp" />
-    </RelativeLayout>
+   <include layout="@layout/layout_title"/>
 
     <EditText
+        android:id="@+id/order_edit_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="top"
-        android:hint="编写你需要的内容"
+        android:hint="编辑内容"
         android:lines="5" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="30dp" >
 
         <TextView
-            android:layout_width="wrap_content"
+            style="@style/left_style"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="订单地址" />
 
         <EditText
+            android:id="@+id/order_edit_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
+            android:background="@null"
             android:hint="请输入送达地址" />
     </LinearLayout>
 
@@ -70,37 +43,82 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="跑跑需求" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:hint="请输入送达地址" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="30dp" >
 
         <TextView
-            android:layout_width="wrap_content"
+            style="@style/left_style"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="跑跑路费" />
 
         <EditText
+            android:id="@+id/order_edit_money"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@null"
+            android:hint="0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical" >
+
+        <TextView
+            style="@style/left_style"
+            android:layout_height="match_parent"
+            android:text="跑跑定时" />
+
+        <TextView
+            android:id="@+id/order_txt_date"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="onMainClick"
+            android:text="2016/5/8" />
+
+        <TextView
+            android:id="@+id/order_txt_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="onMainClick"
+            android:text="15:13" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp" >
+
+        <TextView
+            style="@style/left_style"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="姓名" />
+
+        <TextView
+            android:id="@+id/order_txt_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
-            android:hint="请输入送达地址" />
+            android:text="周安娜" />
     </LinearLayout>
 
     <LinearLayout
@@ -108,40 +126,27 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:layout_width="wrap_content"
+            style="@style/left_style"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="跑跑定时" />
+            android:text="电话" />
 
-        <EditText
+        <TextView
+            android:id="@+id/order_txt_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
-            android:hint="请输入送达地址" />
+            android:text="15879245707" />
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@android:color/darker_gray" />
-    
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="姓名" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:text="周安娜"/>
-    </LinearLayout>
+    <Button
+        android:id="@+id/order_btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:onClick="onMainClick"
+        android:text="确定" />
 
 </LinearLayout>

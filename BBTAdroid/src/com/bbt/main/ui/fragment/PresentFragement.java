@@ -20,7 +20,6 @@ private Button release,accpect;
 		super.onCreateView(inflater, container, savedInstanceState);
 		context=getActivity();
 		view=inflater.inflate(R.layout.present1,null);
-		release=(Button) view.findViewById(R.id.release);
 		accpect=(Button) view.findViewById(R.id.accpect);
 		initFragment();
 		// TODO Auto-generated method stub

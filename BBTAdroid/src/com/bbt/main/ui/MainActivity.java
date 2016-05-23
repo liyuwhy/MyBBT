@@ -7,6 +7,7 @@ import com.avos.avoscloud.okhttp.OkHttpClient;
 import com.avos.avoscloud.okhttp.Request;
 import com.avos.avoscloud.okhttp.Response;
 import com.bbt.main.bean.User;
+import com.bbt.main.tool.ActionBarBuilder;
 import com.bbt.main.tool.SPUtil;
 import com.bbt.main.ui.fragment.HomeFragment;
 import com.bbt.main.ui.fragment.MainFragment;
@@ -68,6 +69,7 @@ public class MainActivity extends SlidingFragmentActivity {
 
 		initFragment(savedInstanceState);
 		initUserInfo();
+		new ActionBarBuilder(this).setLeftGone().setTitleText("∞Ô∞ÔÃ√");
 		// ≥ı ºªØƒ¨»œÕº∆¨
 		//getDefaultImgHead();
 	}
