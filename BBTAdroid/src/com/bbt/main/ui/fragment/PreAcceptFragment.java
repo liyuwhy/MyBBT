@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class AcceptFragment extends Fragment{
+public class PreAcceptFragment extends Fragment{
 	private Context context;
 	
 	private View view;

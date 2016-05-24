@@ -6,27 +6,34 @@
     tools:context="com.bbt.main.ui.MainActivity" 
     android:background="@android:color/white">
     <LinearLayout 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button 
+        android:orientation="horizontal"
+        android:background="#a9cce0">
+        <TextView 
             android:id="@+id/relase"
-            android:text="已发送"
+            android:text="我的发单"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:onClick="onMainClick"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@color/white"
             />
-        <Button
+        <TextView
             android:id="@+id/accpect"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="onMainClick"
             android:layout_weight="1"
-            android:text="已接收" />
+            android:gravity="center"
+            android:textSize="25sp"
+             android:textColor="@color/white"
+            android:text="我的接单" />
         </LinearLayout>
     <FrameLayout 
-        android:id="@+id/present1_frame_layout"
+        android:id="@+id/present_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">

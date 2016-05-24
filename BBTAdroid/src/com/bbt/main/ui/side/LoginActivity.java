@@ -17,6 +17,7 @@ import com.bbt.main.tool.SPUtil;
 import com.bbt.main.ui.R;
 import com.bbt.main.ui.R.id;
 import com.bbt.main.ui.R.layout;
+import com.bbt.main.ui.dialog.WaitDialog;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import android.app.Activity;
@@ -45,6 +46,7 @@ public class LoginActivity extends Activity {
 
 		@Override
 		public void onSuccess(int arg0, org.apache.http.Header[] arg1, byte[] data) {
+			dialog.dismiss();
 
 			String jsonString = new String(data);
 			try {
@@ -70,6 +72,7 @@ public class LoginActivity extends Activity {
 
 		}
 	};
+	private WaitDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +98,8 @@ public class LoginActivity extends Activity {
 			startActivity(intent);
 			break;
 		case R.id.login_btn_submit:
+			dialog = WaitDialog.getWaitDialog(this, "ÕýÔÚ×¢²á");
+			dialog.show();
 			BBTApi.loginToServer(editPhone.getText().toString(), editPassword.getText().toString(), handler);
 			break;
 

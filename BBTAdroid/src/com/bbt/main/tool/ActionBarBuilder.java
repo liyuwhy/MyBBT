@@ -35,6 +35,8 @@ public class ActionBarBuilder {
 		centerTxt = (TextView)mActivity.findViewById(R.id.title_center_txt);
 	}
 	
+	
+	
 	public ActionBarBuilder setLeftGone(){
 		leftImg.setVisibility(View.GONE);
 		return this;
