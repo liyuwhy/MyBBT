@@ -40,9 +40,25 @@
         android:layout_height="5dp"
         android:background="@android:color/darker_gray" />
 
-    <LinearLayout
+   <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="30dp" >
+
+        <TextView
+            style="@style/left_style"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="跑跑需求" />
+
+        <EditText
+            android:id="@+id/order_edit_extra_need"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@null"
+            android:hint="0" />
+        
     </LinearLayout>
 
     <LinearLayout

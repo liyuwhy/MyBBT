@@ -27,7 +27,7 @@ public class ActionOrderActivity extends Activity {
 		Intent intent = new Intent(this, OrderActivity.class);
 		switch (v.getId()) {
 		case R.id.order_action_post:
-			intent.putExtra(OrderActivity.KEY_ORDER_TYPE,"" );
+			intent.putExtra(OrderActivity.KEY_ORDER_TYPE,"¼ÄÈ¡¿ìµÝ");
 			startActivity(intent);
 			break;
 		case R.id.order_action_library:

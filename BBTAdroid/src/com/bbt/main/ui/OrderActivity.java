@@ -4,14 +4,20 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.http.Header;
+
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.SaveCallback;
 import com.bbt.main.base.BBTApp;
 import com.bbt.main.bean.OrderCase;
+import com.bbt.main.net.BBTApi;
 import com.bbt.main.tool.ActionBarBuilder;
 import com.bbt.main.tool.SPUtil;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -44,6 +50,29 @@ public class OrderActivity extends Activity {
 
 	Date date = new Date();
 
+	private EditText extraEdit;
+	
+	
+	
+	private  AsyncHttpResponseHandler hander = new AsyncHttpResponseHandler() {
+		
+
+		
+		@Override
+		public void onSuccess(int arg0, Header[] arg1, byte[] data) {
+			Toast.makeText(OrderActivity.this,"成功"+ new String(data) , 5 * 1000).show();
+		}
+		
+		@Override
+		public void onFailure(int arg0, Header[] arg1, byte[] data, Throwable arg3) {
+			Toast.makeText(OrderActivity.this,"失败"+ new String(data) , 5 * 1000).show();
+		}
+	};
+
+
+
+	private String type;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,7 +80,7 @@ public class OrderActivity extends Activity {
 		initView();
 		new ActionBarBuilder(this).setTitleText("发布订单");
 		
-		String type = getIntent().getStringExtra(KEY_ORDER_TYPE);
+		type = getIntent().getStringExtra(KEY_ORDER_TYPE);
 	}
 
 	@SuppressLint("SimpleDateFormat")
@@ -59,11 +88,15 @@ public class OrderActivity extends Activity {
 		submitBtn = (Button) findViewById(R.id.order_btn_submit);
 		contentEdit = (EditText) findViewById(R.id.order_edit_content);
 		addressEdit = (EditText) findViewById(R.id.order_edit_address);
+		
+		extraEdit = (EditText)findViewById(R.id.order_edit_extra_need);
+		
 		moneyEdit = (EditText) findViewById(R.id.order_edit_money);
 		dataTxt = (TextView) findViewById(R.id.order_txt_date);
 		timeTxt = (TextView) findViewById(R.id.order_txt_time);
 		nameTxt = (TextView) findViewById(R.id.order_txt_name);
 		phoneTxt = (TextView) findViewById(R.id.order_txt_phone);
+		
 
 		// 初始化 时间
 
@@ -88,6 +121,23 @@ public class OrderActivity extends Activity {
 			showDialog(TIME_DIALOG);
 			break;
 		case R.id.order_btn_submit:
+			
+			String contentStr = contentEdit.getText().toString();
+			String addressStr = addressEdit.getText().toString();
+			float moneyStr = Float.valueOf(moneyEdit.getText().toString());
+			String timeStr = dataTxt.getText().toString() + " " + timeTxt.getText().toString();
+			
+			RequestParams params = new RequestParams();
+			params.put("order_content", contentStr);
+			params.put("sender_addr", addressStr);
+			params.put("pay", moneyStr);
+			params.put("finishTime", timeStr);
+			params.put("userId", "20160023");
+			params.put("extra_need", "额外快递");
+			params.put("type", type);
+			params.put("pay_type", "offline");
+			
+			BBTApi.sendOrder(params, hander);
 			//postOrder();
 			break;
 
