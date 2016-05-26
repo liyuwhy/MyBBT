@@ -1,12 +1,17 @@
 package com.bbt.main.ui;
 
 import java.io.IOException;
+
+import org.kymjs.kjframe.KJBitmap;
+
 import com.avos.avoscloud.okhttp.Call;
 import com.avos.avoscloud.okhttp.Callback;
 import com.avos.avoscloud.okhttp.OkHttpClient;
 import com.avos.avoscloud.okhttp.Request;
 import com.avos.avoscloud.okhttp.Response;
-import com.bbt.main.bean.User;
+import com.bbt.json.bean.User;
+import com.bbt.main.net.ApiHttpClient;
+import com.bbt.main.net.BBTApi;
 import com.bbt.main.tool.ActionBarBuilder;
 import com.bbt.main.tool.SPUtil;
 import com.bbt.main.ui.fragment.HomeFragment;
@@ -46,21 +51,18 @@ public class MainActivity extends SlidingFragmentActivity {
 	private Fragment[] fragments;
 	private Button[] btns;
 	private TextView[] txts;
-	private final int[] normalDrawable = new int[] { R.drawable.icon_home_normal, R.drawable.icon_show_normal, R.drawable.icon_message_normal,
-			R.drawable.icon_doing_normal };
-	private final int[] pressDrawable = new int[] { R.drawable.icon_home_press, R.drawable.icon_show_press, R.drawable.icon_message_press,
-			R.drawable.icon_doing_press };
+	private final int[] normalDrawable = new int[] { R.drawable.icon_home_normal, R.drawable.icon_show_normal,
+			R.drawable.icon_message_normal, R.drawable.icon_doing_normal };
+	private final int[] pressDrawable = new int[] { R.drawable.icon_home_press, R.drawable.icon_show_press,
+			R.drawable.icon_message_press, R.drawable.icon_doing_press };
 	int currentFragment = 0;
 	/* private SlidingLayout mMenu; */
 	private CircleImageView circleImgView;
 	private TextView txtName, txtPhonenumber;
 
-	
-
 	private SlidingMenu mSlidingMenu;
 
-	private int textColorAn,textColorLight;
-
+	private int textColorAn, textColorLight;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -75,10 +77,10 @@ public class MainActivity extends SlidingFragmentActivity {
 		initSlidingMenu(savedInstanceState);
 
 		initFragment(savedInstanceState);
-		initUserInfo();
+		// initUserInfo();
 		new ActionBarBuilder(this).setLeftGone().setTitleText("帮帮堂");
 		// 初始化默认图片
-		//getDefaultImgHead();
+		// getDefaultImgHead();
 	}
 
 	@Override
@@ -92,8 +94,11 @@ public class MainActivity extends SlidingFragmentActivity {
 		if (user == null) {
 			return;
 		}
-		txtName.setText(user.getRealname());
-		txtPhonenumber.setText(user.getPhoneNum());
+		initView();
+		txtName.setText(user.getName());
+		txtPhonenumber.setText(user.getPhone());
+
+		BBTApi.displayHeadImg(circleImgView, user.getHeadIcon());
 	}
 
 	/**
@@ -105,7 +110,7 @@ public class MainActivity extends SlidingFragmentActivity {
 
 		// 设置左侧滑动菜单
 		setBehindContentView(R.layout.layout_menu);
-		
+
 		mSlidingMenu = getSlidingMenu();
 		// 设置可以左右滑动的菜单
 		mSlidingMenu.setMode(SlidingMenu.LEFT);
@@ -125,44 +130,6 @@ public class MainActivity extends SlidingFragmentActivity {
 
 	}
 
-	private void getDefaultImgHead() {
-		// 创建okHttpClient对象
-		OkHttpClient mOkHttpClient = new OkHttpClient();
-		// 创建一个Request
-		final Request request = new Request.Builder().url("http://ac-ymmdgvbn.clouddn.com/9c129acb2b623b18.jpg")
-				.build();
-		// new call
-		Call call = mOkHttpClient.newCall(request);
-		// 请求加入调度
-		call.enqueue(new Callback() {
-			@Override
-			public void onFailure(Request request, IOException e) {
-			}
-
-			@Override
-			public void onResponse(final Response response) throws IOException {
-
-				// String htmlStr = response.body().string();
-				runOnUiThread(new Runnable() {
-
-					@Override
-					public void run() {
-						Bitmap bimap = null;
-						try {
-							bimap = BitmapFactory.decodeStream(response.body().byteStream());
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						if (bimap == null)
-							return;
-						circleImgView.setmSrc(bimap);
-					}
-				});
-			}
-		});
-	}
-
 	private void initView() {
 		Button btnHome = (Button) findViewById(R.id.id_btn_home);
 		Button btnNews = (Button) findViewById(R.id.id_btn_show);
@@ -172,15 +139,15 @@ public class MainActivity extends SlidingFragmentActivity {
 		circleImgView = (CircleImageView) findViewById(R.id.menu_circle_img);
 		txtName = (TextView) findViewById(R.id.menu_info_name);
 		txtPhonenumber = (TextView) findViewById(R.id.menu_info_phonenumber);
-		
+
 		txts = new TextView[4];
 		txts[0] = (TextView) findViewById(R.id.id_txt_home);
 		txts[1] = (TextView) findViewById(R.id.id_txt_show);
 		txts[2] = (TextView) findViewById(R.id.id_txt_message);
 		txts[3] = (TextView) findViewById(R.id.id_txt_doing);
-		
+
 		textColorAn = getResources().getColor(R.color.text_an);
-		 textColorLight = getResources().getColor(R.color.text_light);
+		textColorLight = getResources().getColor(R.color.text_light);
 	}
 
 	public void onMainClick(View v) {
@@ -246,36 +213,33 @@ public class MainActivity extends SlidingFragmentActivity {
 		Log.d(TAG, "onChangeFragment" + which);
 		getSupportFragmentManager().beginTransaction().hide(fragments[currentFragment]).show(fragments[which]).commit();
 		currentFragment = which;
-		
-		for(int i=0;i<4;i++){
+
+		for (int i = 0; i < 4; i++) {
 			btns[i].setBackgroundResource(normalDrawable[i]);
 			txts[i].setTextColor(textColorAn);
 		}
-		
+
 		btns[which].setBackgroundResource(pressDrawable[which]);
-        txts[which].setTextColor(textColorLight);		
-		
-		
+		txts[which].setTextColor(textColorLight);
+
 	}
 
 	private void initFragment(Bundle savedInstanceState) {
-		
-		
-		if( savedInstanceState != null){
-			
+
+		if (savedInstanceState != null) {
+
 			fragments[0] = getSupportFragmentManager().findFragmentByTag(fragments[0].getClass().getName());
 			fragments[1] = getSupportFragmentManager().findFragmentByTag(fragments[1].getClass().getName());
 			fragments[2] = getSupportFragmentManager().findFragmentByTag(fragments[2].getClass().getName());
 			fragments[3] = getSupportFragmentManager().findFragmentByTag(fragments[3].getClass().getName());
-			
+
 			currentFragment = savedInstanceState.getInt(KEY_INDEX);
-			
-			 getSupportFragmentManager().beginTransaction()
-			 .hide(fragments[0]).hide(fragments[1]).hide(fragments[2]).hide(fragments[3])
-			 .show(fragments[currentFragment]);
-			
-		}else{
-			
+
+			getSupportFragmentManager().beginTransaction().hide(fragments[0]).hide(fragments[1]).hide(fragments[2])
+					.hide(fragments[3]).show(fragments[currentFragment]);
+
+		} else {
+
 			Bundle bundle = new Bundle();
 			Fragment fragment1 = HomeFragment.newInstance();
 			MainFragment fragment2 = new MainFragment(1);
@@ -283,28 +247,20 @@ public class MainActivity extends SlidingFragmentActivity {
 			MainFragment fragment4 = new MainFragment(3);
 			fragments = new Fragment[] { fragment1, fragment2, fragment3, fragment4 };
 			getSupportFragmentManager().beginTransaction()
-			.add(R.id.id_frame_layout, fragments[0],fragments[0].getClass().getName())
-		    .add(R.id.id_frame_layout, fragments[1],fragments[1].getClass().getName())
-		    .add(R.id.id_frame_layout, fragments[2],fragments[2].getClass().getName())
-		    .add(R.id.id_frame_layout, fragments[3],fragments[3].getClass().getName())
-		    .hide(fragments[0])
-		    .hide(fragments[1])
-		    .hide(fragments[2])
-		    .hide(fragments[3])
-			.show(fragments[0]).commit();
-			
+					.add(R.id.id_frame_layout, fragments[0], fragments[0].getClass().getName())
+					.add(R.id.id_frame_layout, fragments[1], fragments[1].getClass().getName())
+					.add(R.id.id_frame_layout, fragments[2], fragments[2].getClass().getName())
+					.add(R.id.id_frame_layout, fragments[3], fragments[3].getClass().getName()).hide(fragments[0])
+					.hide(fragments[1]).hide(fragments[2]).hide(fragments[3]).show(fragments[0]).commit();
+
 		}
 	}
-	
-	
-	
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(KEY_INDEX, currentFragment);
 	}
-	
-	
 
 	public void toggleMenu(View view) {
 

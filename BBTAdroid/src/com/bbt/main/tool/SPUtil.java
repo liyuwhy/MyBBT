@@ -1,7 +1,11 @@
 package com.bbt.main.tool;
 
-import com.bbt.main.bean.User;
 
+
+import com.avos.avoscloud.LogUtil.log;
+import com.bbt.json.bean.User;
+
+import android.Manifest.permission;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,6 +17,10 @@ public class SPUtil {
 	public static final String SP_IS_Login = "is_login";
 	public static final String SP_User_name = "username";
 	public static final String SP_Phone_number = "phonenumber";
+	public static final String SP_USER_ICON = "user_icon";
+	
+	public static final String SP_User_Id = "user_id";
+	
 	SharedPreferences preferences;
 	private Editor editor;
 
@@ -48,12 +56,36 @@ public class SPUtil {
 	public String getPhoneNumber() {
 		return preferences.getString(SP_Phone_number, "11111");
 	}
+	
+	
+	public void setUserId(int userId){
+		editor.putInt(SP_User_Id, userId);
+		editor.commit();
+	}
+	
+	public int getUserId(){
+		return preferences.getInt(SP_User_Id, 0);
+	}
+	
+	
+	public void setUserIcon(String iconUrl){
+		editor.putString(SP_USER_ICON, iconUrl);
+		editor.commit();
+	}
+	
+	public String getUserIcon(){
+		return preferences.getString(SP_USER_ICON, "");
+	}
 
 	public void saveUserInfo(User user) {
 		setIsLogin(true);
-		setUserName(user.getRealname());
-		setPhoneNumber(user.getPhoneNum());
+		setUserName(user.getName());
+		setPhoneNumber(user.getPhone());
+		setUserId(user.getUserId());
+		setUserIcon(user.getHeadIcon());
 	}
+	
+	
 
 	/**
 	 * 
@@ -64,8 +96,12 @@ public class SPUtil {
 			return null;
 		}
 		User user = new User();
-		user.setPhoneNum(getPhoneNumber());
-		user.setRealname(getUserName());
+		user.setPhone(getPhoneNumber());
+		log.d("TAG", "sp"+ getUserName());
+		user.setName(getUserName());
+		log.d("TAG","name"+ user.getName());
+		user.setUserId(getUserId());
+		user.setHeadIcon(getUserIcon());
 		return user;
 	}
 

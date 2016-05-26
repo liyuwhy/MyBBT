@@ -11,6 +11,7 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.SaveCallback;
 import com.bbt.main.base.BBTApp;
+import com.bbt.main.base.BaseActivity;
 import com.bbt.main.bean.OrderCase;
 import com.bbt.main.net.BBTApi;
 import com.bbt.main.tool.ActionBarBuilder;
@@ -33,13 +34,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class OrderActivity extends Activity {
+public class OrderActivity extends BaseActivity {
 
-	
 	public static final String KEY_ORDER_TYPE = "order_type";
-	
-	
-	
+
 	Button submitBtn;
 	EditText contentEdit, addressEdit, moneyEdit;
 	TextView dataTxt, timeTxt, nameTxt, phoneTxt;
@@ -47,138 +45,26 @@ public class OrderActivity extends Activity {
 	private final static int DATE_DIALOG = 0;
 	private final static int TIME_DIALOG = 1;
 	private Calendar c = null;
-
+	private String type;
 	Date date = new Date();
 
 	private EditText extraEdit;
-	
-	
-	
-	private  AsyncHttpResponseHandler hander = new AsyncHttpResponseHandler() {
-		
 
-		
+	private AsyncHttpResponseHandler hander = new AsyncHttpResponseHandler() {
+
 		@Override
 		public void onSuccess(int arg0, Header[] arg1, byte[] data) {
-			Toast.makeText(OrderActivity.this,"成功"+ new String(data) , 5 * 1000).show();
+			hideWaitDialog();
+			Toast.makeText(OrderActivity.this, "成功" + new String(data), 5 * 1000).show();
+			startActivity(MainActivity.class);
 		}
-		
+
 		@Override
 		public void onFailure(int arg0, Header[] arg1, byte[] data, Throwable arg3) {
-			Toast.makeText(OrderActivity.this,"失败"+ new String(data) , 5 * 1000).show();
+			hideWaitDialog();
+			Toast.makeText(OrderActivity.this, "失败" , 5 * 1000).show();
 		}
 	};
-
-
-
-	private String type;
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_order);
-		initView();
-		new ActionBarBuilder(this).setTitleText("发布订单");
-		
-		type = getIntent().getStringExtra(KEY_ORDER_TYPE);
-	}
-
-	@SuppressLint("SimpleDateFormat")
-	private void initView() {
-		submitBtn = (Button) findViewById(R.id.order_btn_submit);
-		contentEdit = (EditText) findViewById(R.id.order_edit_content);
-		addressEdit = (EditText) findViewById(R.id.order_edit_address);
-		
-		extraEdit = (EditText)findViewById(R.id.order_edit_extra_need);
-		
-		moneyEdit = (EditText) findViewById(R.id.order_edit_money);
-		dataTxt = (TextView) findViewById(R.id.order_txt_date);
-		timeTxt = (TextView) findViewById(R.id.order_txt_time);
-		nameTxt = (TextView) findViewById(R.id.order_txt_name);
-		phoneTxt = (TextView) findViewById(R.id.order_txt_phone);
-		
-
-		// 初始化 时间
-
-		SimpleDateFormat formatDate = new SimpleDateFormat("yy-MM-dd");
-		SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm");
-		dataTxt.setText(formatDate.format(date));
-		timeTxt.setText(formatTime.format(date));
-
-		// 初始化 姓名 电话
-		SPUtil spUtil = new SPUtil(this);
-		nameTxt.setText(spUtil.getUserName());
-		phoneTxt.setText(spUtil.getPhoneNumber());
-	}
-
-	public void onMainClick(View v) {
-
-		switch (v.getId()) {
-		case R.id.order_txt_date:
-			showDialog(DATE_DIALOG);
-			break;
-		case R.id.order_txt_time:
-			showDialog(TIME_DIALOG);
-			break;
-		case R.id.order_btn_submit:
-			
-			String contentStr = contentEdit.getText().toString();
-			String addressStr = addressEdit.getText().toString();
-			float moneyStr = Float.valueOf(moneyEdit.getText().toString());
-			String timeStr = dataTxt.getText().toString() + " " + timeTxt.getText().toString();
-			
-			RequestParams params = new RequestParams();
-			params.put("order_content", contentStr);
-			params.put("sender_addr", addressStr);
-			params.put("pay", moneyStr);
-			params.put("finishTime", timeStr);
-			params.put("userId", "20160023");
-			params.put("extra_need", "额外快递");
-			params.put("type", type);
-			params.put("pay_type", "offline");
-			
-			BBTApi.sendOrder(params, hander);
-			//postOrder();
-			break;
-
-		default:
-			break;
-		}
-
-	}
-
-/*	private void postOrder() {
-		
-		AVUser user = ((BBTApp)getApplication()).getAvUser();
-		if ( user == null) {
-			// 未登录
-			Toast.makeText(this, "未登录", 3 * 1000).show();
-			return;
-		}
-
-		String contentStr = contentEdit.getText().toString();
-		String addressStr = addressEdit.getText().toString();
-		float moneyStr = Float.valueOf(moneyEdit.getText().toString());
-		String timeStr = dataTxt.getText().toString() + " " + timeTxt.getText().toString();
-		OrderCase order = new OrderCase(contentStr, addressStr, timeStr, moneyStr);
-	
-	
-		Log.d("Order", "order"+order.getObjectId());
-	 
-		OrderCaseDao.postOrder( user, order, new SaveCallback() {
-
-			@Override
-			public void done(AVException e) {
-				if( e== null){
-					Toast.makeText(OrderActivity.this, "提交成功", 5 * 1000).show();
-				}else{
-					Toast.makeText(OrderActivity.this, "提交失败"+e.getMessage(), 5 * 1000).show();
-				}
-				
-			}
-		});
-
-	}*/
 
 	/**
 	 * 创建日期及时间选择对话框
@@ -208,6 +94,85 @@ public class OrderActivity extends Activity {
 			break;
 		}
 		return dialog;
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.order_txt_date:
+			showDialog(DATE_DIALOG);
+			break;
+		case R.id.order_txt_time:
+			showDialog(TIME_DIALOG);
+			break;
+		case R.id.order_btn_submit:
+
+			String contentStr = contentEdit.getText().toString();
+			String addressStr = addressEdit.getText().toString();
+			float moneyStr = Float.valueOf(moneyEdit.getText().toString());
+			String timeStr = dataTxt.getText().toString() + " " + timeTxt.getText().toString();
+
+			RequestParams params = new RequestParams();
+			params.put("order_content", contentStr);
+			params.put("sender_addr", addressStr);
+			params.put("pay", moneyStr);
+			params.put("finishTime", timeStr);
+			
+			Log.d("TAG", "userId"+new SPUtil(this).getUserId());
+			params.put("userId", new SPUtil(this).getUserId());
+			params.put("extra_need", "额外快递");
+			params.put("type", type);
+			params.put("pay_type", "offline");
+			showWaitDialog();
+
+			BBTApi.sendOrder(params, hander);
+			// postOrder();
+			break;
+
+		default:
+			break;
+		}
+
+	}
+
+	@Override
+	public void initView() {
+		submitBtn = (Button) findViewById(R.id.order_btn_submit);
+		contentEdit = (EditText) findViewById(R.id.order_edit_content);
+		addressEdit = (EditText) findViewById(R.id.order_edit_address);
+
+		extraEdit = (EditText) findViewById(R.id.order_edit_extra_need);
+
+		moneyEdit = (EditText) findViewById(R.id.order_edit_money);
+		dataTxt = (TextView) findViewById(R.id.order_txt_date);
+		timeTxt = (TextView) findViewById(R.id.order_txt_time);
+		nameTxt = (TextView) findViewById(R.id.order_txt_name);
+		phoneTxt = (TextView) findViewById(R.id.order_txt_phone);
+
+		// 初始化 时间
+
+		SimpleDateFormat formatDate = new SimpleDateFormat("yy-MM-dd");
+		SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm");
+		dataTxt.setText(formatDate.format(date));
+		timeTxt.setText(formatTime.format(date));
+
+		// 初始化 姓名 电话
+		SPUtil spUtil = new SPUtil(this);
+		nameTxt.setText(spUtil.getUserName());
+		phoneTxt.setText(spUtil.getPhoneNumber());
+
+	}
+
+	@Override
+	public void initData() {
+		new ActionBarBuilder(this).setTitleText("发布订单");
+		type = getIntent().getStringExtra(KEY_ORDER_TYPE);
+
+	}
+
+	@Override
+	protected int getLayoutId() {
+		return R.layout.activity_order;
 	}
 
 }

@@ -1,4 +1,5 @@
 package com.bbt.main.ui.fragment;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,21 +27,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bbt.main.base.BaseFragment;
+import com.bbt.main.net.BBTApi;
+import com.bbt.main.tool.JsonHelper;
 import com.bbt.main.ui.OrderdetailsActivity;
 import com.bbt.main.ui.R;
 import com.bbt.main.ui.Adapt.ListBaseAdapter;
 import com.bbt.main.ui.Adapt.ViewPagerAdapter;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
 public class HomeFragment extends BaseFragment implements OnItemClickListener {
-	
-	
-	
-	
-	public static HomeFragment newInstance(){
+
+	public static HomeFragment newInstance() {
 		return new HomeFragment();
 	}
-	
-	
-	
+
 	private ListBaseAdapter adapter1;
 	private ListView listv;
 
@@ -49,90 +49,80 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener {
 	private List<ImageView> images;
 	private List<View> dots;
 	private int currentItem;
-	// ¼ÇÂ¼ÉÏÒ»´ÎµãµÄÎ»ÖÃ
+	// è®°å½•ä¸Šä¸€æ¬¡ç‚¹çš„ä½ç½®
 	private int oldPosition = 0;
-	// ´æ·ÅÍ¼Æ¬µÄid
-	private int[] imageIds = new int[] { R.drawable.ad_top_c, R.drawable.ad_top_o,
-			R.drawable.ad_top_t };
-	private String names[] = new String[] { "ÖéÖé", "ÁÖÜç", "ÀîĞÀÊé", "yoho" };
-	private String time[] = new String[] { "21·ÖÖÓÇ°", "41·ÖÖÓÇ°", "1¸öĞ¡Ê±Ç°", "2¸öĞ¡Ê±Ç°" };
-	private String descs[] = new String[] { "[·å´ï´ï]¿ìµİ±àºÅ£¨*Âë*£©ÖĞÍ¨¿ìµİ£¬Ãñ×å´óÑ§Î÷ÃÅÓÒ×ß30Ã×Ê±ÉĞ´ÔÁÖµêÄÚÈ¡", "ÖĞÍ¨¿ìµİ", "Ğ¡¶«ÃÅÈ¡¿ìµİ", "¡¾¿ìµİĞÅ¡¿¹Ø×¢Î¢ĞÅ¡£¡£" };
-	private int[] imageView = new int[] { R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d };
-	private int[] imageView1 = new int[] { R.drawable.nv, R.drawable.nan, R.drawable.nv, R.drawable.nv };
-	private int[] imageView2 = new int[] { R.id.xian, R.id.xian, R.id.xian, R.id.xian };
-	private int[] imageView3 = new int[] { R.id.xian2, R.id.xian2, R.id.xian2, R.id.xian2 };
-	private String[] school = new String[] { "ÖĞ¹úÃñ×å´óÑ§", "ÖĞ¹úÃñ×å´óÑ§", "ÖĞ¹úÃñ×å´óÑ§", "ÖĞ¹úÃñ×å´óÑ§" };
-	private int[] pao = new int[] { R.drawable.pao, R.drawable.pao, R.drawable.pao, R.drawable.pao };
-	private String fabu[] = new String[] { "ĞÂ·¢²¼", "±»ÇÀÁË", "ĞÂ·¢²¼", "ĞÂ·¢²¼" };
-	private String money[] = new String[] { "×¬2Ôª", "×¬10Ôª", "×¬20Ôª", "×¬3Ôª" };
+	// å­˜æ”¾å›¾ç‰‡çš„id
+	private int[] imageIds = new int[] { R.drawable.ad_top_c, R.drawable.ad_top_o, R.drawable.ad_top_t };
+
 	private TextView title1;
 	private ViewPagerAdapter adapter;
 	private ScheduledExecutorService scheduledExecutorService;
-	
-	
+
+	AsyncHttpResponseHandler hander = new AsyncHttpResponseHandler() {
+
+		@Override
+		public void onSuccess(int arg0, org.apache.http.Header[] arg1, byte[] result) {
+
+			String jsonString = new String(result);
+			System.out.println("jsonstring" + jsonString);
+			
+			
+			// ï¿½ï¿½ï¿½ï¿½Jsonï¿½Ö·ï¿½ï¿½ï¿½
+			list = JsonHelper.jsonStringToList(jsonString,
+					new String[] { "address", "happentime", "order_content", "pay", "icon", "name" }, "data");
+			adapter1.setNewData(list);
+			listv.setAdapter(adapter1);
+		}
+
+		@Override
+		public void onFailure(int arg0, org.apache.http.Header[] arg1, byte[] arg2, Throwable arg3) {
+			// TODO Auto-generated method stub
+
+		}
+	};
 
 	@Override
 	protected int getLayoutId() {
 		return R.layout.fragment_home;
 	}
-	
-	
+
 	@Override
 	protected void initView(View view, Bundle saveInstanceState) {
-		
-	
+
 		mViewPaper = (ViewPager) view.findViewById(R.id.vp);
-		// ÏÔÊ¾µÄĞ¡µã
+		// æ˜¾ç¤ºçš„å°ç‚¹
 		dots = new ArrayList<View>();
 		dots.add(view.findViewById(R.id.dot_0));
 		dots.add(view.findViewById(R.id.dot_1));
 		dots.add(view.findViewById(R.id.dot_2));
-		
-		// ³õÊ¼»¯ imgs
+
+		// åˆå§‹åŒ– imgs
 		init();
 		adapter = new ViewPagerAdapter(images);
 		mViewPaper.setAdapter(adapter);
 		setListener();
-	/*	scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-		scheduledExecutorService.scheduleWithFixedDelay(new ViewPageTask(), 4, 3, TimeUnit.SECONDS);
-		
-		*/
-		
+		/*
+		 * scheduledExecutorService =
+		 * Executors.newSingleThreadScheduledExecutor();
+		 * scheduledExecutorService.scheduleWithFixedDelay(new ViewPageTask(),
+		 * 4, 3, TimeUnit.SECONDS);
+		 * 
+		 */
+
 		initData();
 		listv = (ListView) view.findViewById(R.id.myfirstpager_list);
-		adapter1 = new ListBaseAdapter(list);
-		listv.setAdapter(adapter1);
-		listv.setOnItemClickListener(this);
-		
-	}
+		adapter1 = new ListBaseAdapter();
 	
-	private void initData() {
-		// ÊµÀı»¯¼¯ºÏ
-		list = new ArrayList<Map<String, Object>>();
-		for (int i = 0; i < names.length; i++) {
-			// ´´½¨¼üÖµ¶Ô²¢ÊµÀı»¯
-			Map<String, Object> map = new HashMap<String, Object>();
-			// ½«Êı¾İ´æÈë¼üÖµ¶Ô
-			// map.put("title", title[i]);  ±êÌâ
-			// map.put("name", names[i]);  ·¢²¼Õß
-			// map.put("content", content[i]);  ÄÚÈİ
-			map.put("head", imageView[i]);
-			map.put("personName", names[i]);
-			map.put("time", time[i]);
-			map.put("image", imageView1[i]);
-			map.put("desc", descs[i]);
-			map.put("xian", imageView2[i]);
-			map.put("school", school[i]);
-			map.put("pao", pao[i]);
-			map.put("fabu", fabu[i]);
-			map.put("imageView", imageView3[i]);
-			map.put("money", money[i]);
-			// ½«¼üÖµ¶Ô´æÈë¼¯ºÏ
-			list.add(map);
-		}
+		listv.setOnItemClickListener(this);
+
 	}
+
+	private void initData() {
+		BBTApi.getDefaultOrder(hander);
+	}
+
 	/**
-	 * ÀûÓÃÏß³Ì³Ø¶¨Ê±Ö´ĞĞ¶¯»­ÂÖ²¥
+	 * åˆ©ç”¨çº¿ç¨‹æ± å®šæ—¶æ‰§è¡ŒåŠ¨ç”»è½®æ’­
 	 */
 
 	private class ViewPageTask implements Runnable {
@@ -143,16 +133,15 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener {
 			mHandler.sendEmptyMessage(0);
 		}
 	}
+
 	/**
-	 * ½ÓÊÕ×ÓÏß³Ì´«µİ¹ıÀ´µÄÊı¾İ
+	 * æ¥æ”¶å­çº¿ç¨‹ä¼ é€’è¿‡æ¥çš„æ•°æ®
 	 */
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			mViewPaper.setCurrentItem(currentItem);
 		};
 	};
-
-
 
 	protected void setListener() {
 
@@ -181,36 +170,23 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener {
 	}
 
 	protected void init() {
-		// ÏÔÊ¾µÄÍ¼Æ¬
+		// æ˜¾ç¤ºçš„å›¾ç‰‡
 		images = new ArrayList<ImageView>();
 		for (int i = 0; i < imageIds.length; i++) {
 			ImageView imageView = new ImageView(getHoldingActivity());
 			imageView.setBackgroundResource(imageIds[i]);
 			images.add(imageView);
 		}
-		// ÉèÖÃÍ¼Æ¬±êÌâ
+		// è®¾ç½®å›¾ç‰‡æ ‡é¢˜
 		// title.setText(titles[0]);
 	}
-	
 
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-		// TODO Auto-generated method stub
-		int imageView=(Integer) list.get(position).get("head");
-		String name=list.get(position).get("personName").toString();
-		String time=list.get(position).get("time").toString();
-		int imageView1=(Integer) list.get(position).get("image");
-		String descs=list.get(position).get("desc").toString();
-		int imageView2=(Integer) list.get(position).get("xian");
-		String school=list.get(position).get("school").toString();
-		int pao=(Integer) list.get(position).get("pao");
-		String fabu=list.get(position).get("fabu").toString();
-		int imageView3=(Integer) list.get(position).get("imageView");
-		String money=list.get(position).get("money").toString();
-		
-		Intent intent=new Intent(getActivity(),OrderdetailsActivity.class);
-		Bundle bundle=new Bundle();
-		bundle.putInt("head",imageView);
+
+		Intent intent = new Intent(getActivity(), OrderdetailsActivity.class);
+		/*Bundle bundle = new Bundle();
+		bundle.putInt("head", imageView);
 		bundle.putString("personName", name);
 		bundle.putString("time", time);
 		bundle.putInt("image", imageView1);
@@ -221,8 +197,8 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener {
 		bundle.putString("fabu", fabu);
 		bundle.putInt("imageView", imageView3);
 		bundle.putString("money", money);
-		intent.putExtras(bundle);
+		intent.putExtras(bundle);*/
 		startActivity(intent);
-		
+
 	}
 }

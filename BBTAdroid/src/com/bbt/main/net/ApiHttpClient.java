@@ -40,6 +40,19 @@ public class ApiHttpClient {
         Log.d("BASE_CLIENT", "request:" + url);
         return url;
     }
+    
+    public static void get(String partUrl, AsyncHttpResponseHandler handler) {
+        client.get(getAbsoluteApiUrl(partUrl), handler);
+        log(new StringBuilder("GET ").append(partUrl).toString());
+    }
+
+    public static void get(String partUrl, RequestParams params,
+            AsyncHttpResponseHandler handler) {
+        client.get(getAbsoluteApiUrl(partUrl), params, handler);
+        log(new StringBuilder("GET ").append(partUrl).append("&")
+                .append(params).toString());
+    }
+
 
     public static void post(String partUrl, RequestParams params,
             AsyncHttpResponseHandler handler) {

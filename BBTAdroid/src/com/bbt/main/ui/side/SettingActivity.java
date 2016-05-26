@@ -13,6 +13,7 @@ import org.apache.http.Header;
 import com.bbt.main.net.ApiHttpClient;
 import com.bbt.main.net.BBTApi;
 import com.bbt.main.tool.PictureUtil;
+import com.bbt.main.tool.SPUtil;
 import com.bbt.main.ui.R;
 import com.bbt.main.view.BannerLayout;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -66,10 +67,15 @@ public class SettingActivity extends Activity {
 
 	private File imgFile;
 
+	private ImageView imgUserIcon;
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {  
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_set);
+		
+		imgUserIcon =(ImageView)findViewById(R.id.setting_id_head);
+		BBTApi.displayHeadImg(imgUserIcon, new SPUtil(this).getUserIcon());
 	}
 
 	private void showDialog() {
@@ -181,6 +187,11 @@ public class SettingActivity extends Activity {
 			startActionCrop(takePhotoUri);// ≈ƒ’’∫Û≤√ºÙ
 			
 			break;
+		
+		
+		case REQUEST_CODE_GET_PHOTO:
+			 startActionCrop(imageReturnIntent.getData());
+			 break;
 
 		case REQUEST_CODE_CROP:
 			Toast.makeText(this, "get finish", 1000 * 5).show();
@@ -197,7 +208,7 @@ public class SettingActivity extends Activity {
 	private void uploadNewPhoto() {
 
 		try {
-			BBTApi.updatePortrait("1597", imgFile, new AsyncHttpResponseHandler() {
+			BBTApi.updatePortrait(new SPUtil(this).getPhoneNumber(), imgFile, new AsyncHttpResponseHandler() {
 
 				@Override
 				public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {

@@ -4,5 +4,12 @@
     <string name="app_name">帮帮堂</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_order">OrderActivity</string>
+    
+    
+        <string name="loading">加载中…</string>
+    <string name="loading_no_more">已加载全部</string>
+    
 
+    
+    <string name="error_view_no_data">暂无内容</string>
 </resources>

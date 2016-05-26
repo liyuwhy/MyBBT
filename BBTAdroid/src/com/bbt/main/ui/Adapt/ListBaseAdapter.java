@@ -5,33 +5,35 @@ import java.util.Map;
 
 import org.w3c.dom.Text;
 
+import com.bbt.main.net.BBTApi;
+import com.bbt.main.tool.StringUtils;
 import com.bbt.main.ui.R;
-
+import com.bbt.main.ui.Adapt.ListBaseAdapter.ViewHolder;
+import com.bbt.main.view.CircleImageView;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
                
 
 public class ListBaseAdapter extends BaseAdapter{
-	List<Map<String, Object>> list;
-	public ListBaseAdapter(List<Map<String, Object>> list) {
-		this.list = list;
-	}
+	private List<Map<String, Object>> list1;
+	private ViewHolder holder;
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return list.size();
-		
+		return list1.size();
 	}
-
 	@Override	
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return list.get(position);
+		return list1.get(position);
 	}
 	
 	@Override
@@ -39,46 +41,72 @@ public class ListBaseAdapter extends BaseAdapter{
 		return position;
 	}
 	@Override
-	public View getView(int position, View view, ViewGroup parent) {
-		// ´´½¨View
-		view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item,
-				parent, false);
-		// ÅäÖÃÊý¾Ý
-		setData(position, view);
-		return view;
+	public View getView(int position, View convertView, ViewGroup parent) {
+
+		// ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+		if (convertView == null) {
+			// ï¿½ï¿½ï¿½ï¿½Viewï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½itemï¿½ï¿½
+			convertView = LayoutInflater.from(parent.getContext()).inflate(
+					R.layout.item_main_layout, parent, false);
+			// Í¨ï¿½ï¿½ViewHolderï¿½ï¿½È¥ï¿½ï¿½È¡ï¿½Ø¼ï¿½ï¿½ï¿½È»ï¿½ï¿½ViewHolderï¿½ï¿½ï¿½ï¿½ï¿½convertViewï¿½ï¿½
+			holder = new ViewHolder();
+			holder.layout = (LinearLayout) convertView.findViewById(R.id.lineLayout);
+			holder.address = (TextView) convertView.findViewById(R.id.tv_order_address);
+			holder.time = (TextView) convertView.findViewById(R.id.tv_time);
+			holder.context = (TextView) convertView.findViewById(R.id.tv_order_context);
+			holder.nickname = (TextView) convertView.findViewById(R.id.tv_order_name);
+			holder.order_money = (TextView) convertView.findViewById(R.id.tv_money);
+			holder.icon=(CircleImageView) convertView.findViewById(R.id.menu_circle_img);
+			// ï¿½ï¿½ViewHolderï¿½ï¿½ï¿½ï¿½
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
+		}
+		setData(position, parent);
+		return convertView;
 	}
-	private void setData(int position, View view) {
+	private void setData(int position, ViewGroup parent) {
+		
+		if(position%2==0){
+			holder.layout.setBackgroundResource(R.drawable.item_main_bg);
+		}else{
+			holder.layout.setBackgroundResource(R.drawable.item_main_bg_change);
+		}
+		
+		
+		System.out.println("content"+list1.get(position).get("order_content").toString());
+		System.out.println("list"+list1.get(position).get("happentime").toString());
+		String friendlyText = StringUtils.friendly_time(list1.get(position).get("happentime").toString());
+		holder.time.setText(friendlyText);
+		
+		
+		
+		
+		holder.address.setText(list1.get(position).get("address").toString());
+		holder.context.setText(list1.get(position).get("order_content").toString());
+		holder.order_money.setText(list1.get(position).get("pay").toString());
+		holder.nickname.setText(list1.get(position).get("name").toString());
+		// ï¿½ï¿½È¡Í¼Æ¬url
+		String image_url = list1.get(position).get("icon").toString();
+		// ï¿½ï¿½Í¼Æ¬ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹Í¼Æ¬ï¿½ï¿½Î»
+		holder.icon.setTag(image_url);
+		
+		BBTApi.displayHeadImg(holder.icon, image_url);
+		
+	}
+	public class ViewHolder {
+		LinearLayout layout;
+		TextView nickname;
+		TextView time;
+		TextView address;
+		TextView context;
+		TextView order_money;
+		CircleImageView icon;
+	}
+	public void setNewData(List<Map<String, Object>> list1) {
 		// TODO Auto-generated method stub
-		ImageView head =(ImageView) view.findViewById(R.id.head);
-		TextView name = (TextView) view.findViewById(R.id.name);
-		TextView time=(TextView) view.findViewById(R.id.time);
-		TextView descs=(TextView) view.findViewById(R.id.desc);
-		ImageView xian=(ImageView) view.findViewById(R.id.xian);
-		TextView school=(TextView) view.findViewById(R.id.school);
-		ImageView pao=(ImageView) view.findViewById(R.id.pao);
-		TextView fabu=(TextView) view.findViewById(R.id.fabu);
-		TextView money=(TextView) view.findViewById(R.id.money);
-		// Îª¿Ø¼þÈ¥ÅäÖÃÊý¾Ý
-//		 map.put("head",imageView[i]);
-//         map.put("personName",names[i]);
-//         map.put("time",time[i]);
-//         map.put("image",imageView1[i]);
-//         map.put("desc",descs[i]);
-//         map.put("xian",imageView2[i]);
-//         map.put("school",school[i]);
-//         map.put("pao",pao[i]);
-//         map.put("fabu",fabu[i]);
-//         map.put("imageView",imageView3[i]);
-//         map.put("money",money[i]);
-		Map<String,Object> data = (Map) getItem(position);
-		head.setImageResource((Integer) data.get("head"));
-		name.setText(list.get(position).get("personName").toString());
-		time.setText(list.get(position).get("time").toString());
-		descs.setText(list.get(position).get("desc").toString());
-		// xian.setImageResource((Integer) list.get(position).get("xian"));
-		 school.setText(list.get(position).get("school").toString());
-		 pao.setImageResource((Integer) list.get(position).get("pao"));
-		 fabu.setText(list.get(position).get("fabu").toString());
-		 money.setText(list.get(position).get("money").toString());
+		this.list1 = list1;
+		// Í¨Öªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		notifyDataSetChanged();
 	}
 }

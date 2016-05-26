@@ -6,21 +6,13 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.LogInCallback;
-import com.bbt.main.bean.User;
-import com.bbt.main.dao.UserDao;
+import com.bbt.json.bean.User;
+import com.bbt.main.base.BaseActivity;
 import com.bbt.main.net.BBTApi;
-import com.bbt.main.tool.HttpClientHelper;
 import com.bbt.main.tool.SPUtil;
 import com.bbt.main.ui.R;
-import com.bbt.main.ui.R.id;
-import com.bbt.main.ui.R.layout;
-import com.bbt.main.ui.dialog.WaitDialog;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,9 +22,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.Space;
 import android.widget.Toast;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseActivity {
 	private Intent intent;
 	public static final String TAG = "login";
 	private EditText editPhone;
@@ -46,7 +39,7 @@ public class LoginActivity extends Activity {
 
 		@Override
 		public void onSuccess(int arg0, org.apache.http.Header[] arg1, byte[] data) {
-			dialog.dismiss();
+			hideWaitDialog();
 
 			String jsonString = new String(data);
 			try {
@@ -54,55 +47,63 @@ public class LoginActivity extends Activity {
 				String code = jsonObject.getString("code");
 				System.out.println(jsonObject.toString());
 				if (code.equals("200")) {
-					Toast.makeText(LoginActivity.this, "µÇÂ¼³É¹¦", Toast.LENGTH_SHORT).show();
-					// getjson
-					// share
+					
+					
+					User user = User.parserToUser(jsonObject.getString(User.JSONMain).toString());
+					Toast.makeText(LoginActivity.this, "µÇÂ¼³É¹¦"+user.getHeadIcon(), Toast.LENGTH_SHORT).show();
+					new SPUtil(LoginActivity.this).saveUserInfo(user);
+					
 				} else if (code.equals("101")) {
 					Toast.makeText(LoginActivity.this, "ÃÜÂë´íÎó", Toast.LENGTH_SHORT).show();
 				} else if (code.equals("102")) {
 					Toast.makeText(LoginActivity.this, "ÕËºÅ²»´æÔÚ", Toast.LENGTH_SHORT).show();
 				}
-				// else if()
-				// {
-				// handler.sendEmptyMessage(0x126);
-				// }
+
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 
 		}
 	};
-	private WaitDialog dialog;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
-		initview();
-	}
-
-	private void initview() {
-		editPhone = (EditText) findViewById(R.id.login_edit_phone);
-		editPassword = (EditText) findViewById(R.id.login_edit_password);
-	}
-
-	public void onMainClick(View v) {
+	public void onClick(View v) {
 		Log.d(TAG, "+++onMainClick");
 		switch (v.getId()) {
 		case R.id.login_cancel:
 			finish();
 			break;
 		case R.id.tv_register:
-			intent = new Intent(LoginActivity.this, RegisterActivity.class);
-			startActivity(intent);
+			startActivity(RegisterActivity.class);
 			break;
 		case R.id.login_btn_submit:
-			dialog = WaitDialog.getWaitDialog(this, "ÕýÔÚ×¢²á");
-			dialog.show();
+			showWaitDialog();
 			BBTApi.loginToServer(editPhone.getText().toString(), editPassword.getText().toString(), handler);
 			break;
-
 		}
+	}
+	
+	
+
+	@Override
+	public void initView() {
+		editPhone = (EditText) findViewById(R.id.login_edit_phone);
+		editPassword = (EditText) findViewById(R.id.login_edit_password);
+
+	}
+
+
+
+	@Override
+	protected int getLayoutId() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_login;
+	}
+
+
+
+	@Override
+	public void initData() {
+		
 	}
 }

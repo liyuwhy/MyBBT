@@ -10,8 +10,15 @@
         <enum name="circle" value="0" />
         <enum name="round" value="1" />
     </attr>
+    
+       <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+    </declare-styleable>
+    
+       
     <attr name="src" format="reference"></attr>
-
+<!-- 
     <declare-styleable name="CircleImageView">
         <attr name="borderRadius" />
         <attr name="type" />
@@ -19,7 +26,7 @@
     </declare-styleable>
 
 
-
+ -->
  
     
         <declare-styleable name="SlidingMenu">

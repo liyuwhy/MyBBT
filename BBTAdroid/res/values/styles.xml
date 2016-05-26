@@ -2,14 +2,14 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
 
 
     <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
     -->
 
     <style name="Widget"></style>
@@ -17,9 +17,8 @@
     <style name="Widget.ProgressBar">
         <item name="android:indeterminateDrawable">@drawable/progress_medium_holo</item>
     </style>
-    
-    
-        <style name="dialog_waiting" parent="@android:style/Theme.Dialog">
+
+    <style name="dialog_waiting" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@drawable/dialog_background</item>
     </style>
 
@@ -43,6 +42,14 @@
 
     <style name="edit_style">
         <item name="android:background">@null</item>
+    </style>
+
+    <!-- 加载滚动条样式 -->
+    <style name="loading">
+        <item name="android:indeterminate">true</item>
+        <item name="android:indeterminateDrawable">@drawable/progressloading</item>
+        <item name="android:indeterminateDuration">1000</item>
+        <item name="android:indeterminateOnly">true</item>
     </style>
 
 </resources>

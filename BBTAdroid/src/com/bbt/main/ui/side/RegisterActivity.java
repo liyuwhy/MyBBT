@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.SignUpCallback;
+import com.bbt.main.base.BaseActivity;
 import com.bbt.main.bean.User;
 import com.bbt.main.dao.UserDao;
 import com.bbt.main.net.BBTApi;
@@ -28,9 +29,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-public class RegisterActivity extends Activity {
-	private static final String URL = "http://192.168.191.1:8080/BBTWebServer/register";
-	public static final String TAG = "register";
+public class RegisterActivity extends BaseActivity {
 
 	private AsyncHttpResponseHandler handler = new AsyncHttpResponseHandler() {
 		@Override
@@ -41,6 +40,7 @@ public class RegisterActivity extends Activity {
 		@Override
 		public void onSuccess(int arg0, org.apache.http.Header[] arg1, byte[] data) {
 
+			hideWaitDialog();
 			String jsonString = new String(data);
 			try {
 
@@ -59,15 +59,15 @@ public class RegisterActivity extends Activity {
 		}
 	};
 
+
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.register);
-		initView();
+	public void onClick(View v) {
+		
 	}
 
-	private void initView() {
+	@Override
+	public void initView() {
 		final RadioButton btnNan = (RadioButton) findViewById(R.id.register_radiobtn_nan);
 		final RadioButton btnNv = (RadioButton) findViewById(R.id.register_radiobtn_nv);
 		final EditText editnickname = (EditText) findViewById(R.id.nickname);
@@ -93,9 +93,21 @@ public class RegisterActivity extends Activity {
 				params.put("stuNum", editPhoneStunum.getText().toString());
 				params.put("pwd", editPhonePassword.getText().toString());
 				params.put("sex", sex);
+				
+				showWaitDialog();
 				BBTApi.registerToServer(params, handler);
 
 			}
 		});
+		
+	}
+
+	@Override
+	public void initData() {
+	}
+
+	@Override
+	protected int getLayoutId() {
+		return R.layout.register;
 	}
 }

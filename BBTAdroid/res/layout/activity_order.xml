@@ -98,7 +98,7 @@
             android:layout_marginLeft="10dp"
             android:clickable="true"
             android:gravity="center"
-            android:onClick="onMainClick"
+            android:onClick="onClick"
             android:text="2016/5/8" />
 
         <TextView
@@ -108,7 +108,7 @@
             android:layout_marginLeft="10dp"
             android:clickable="true"
             android:gravity="center"
-            android:onClick="onMainClick"
+            android:onClick="onClick"
             android:text="15:13" />
     </LinearLayout>
 
@@ -162,7 +162,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:onClick="onMainClick"
+        android:onClick="onClick"
         android:text="确定" />
 
 </LinearLayout>

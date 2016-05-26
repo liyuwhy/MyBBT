@@ -60,7 +60,7 @@
            android:layout_height="35dp"
            android:layout_marginLeft="110dp"
            android:layout_gravity="center"
-           android:background="@drawable/raduio"
+           android:background="@drawable/item_main_bg"
            android:text="接单" />
    </LinearLayout>
    <TextView
