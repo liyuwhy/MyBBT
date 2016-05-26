@@ -83,18 +83,18 @@ public class SettingActivity extends Activity {
 		dialog = new Dialog(this, R.style.transparentFrameWindowStyle);
 		dialog.setContentView(view, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 		android.view.Window window = dialog.getWindow();
-		// ÉèÖÃÏÔÊ¾¶¯»­
+		// è®¾ç½®æ˜¾ç¤ºåŠ¨ç”»
 		window.setWindowAnimations(R.style.main_menu_animstyle);
 		WindowManager.LayoutParams wl = window.getAttributes();
 		wl.x = 0;
-		// YÉèÖÃ´óÓÚÆÁÄ» ËüÒ²»á×Ô¶¯ÏÔÊ¾ÔÚ´°¿ÚÏÂÃæ
+		// Yè®¾ç½®å¤§äºå±å¹• å®ƒä¹Ÿä¼šè‡ªåŠ¨æ˜¾ç¤ºåœ¨çª—å£ä¸‹é¢
 		wl.y = 1000;
-		// ÒÔÏÂÕâÁ½¾äÊÇÎªÁË±£Ö¤°´Å¥¿ÉÒÔË®Æ½ÂúÆÁ
+		// ä»¥ä¸‹è¿™ä¸¤å¥æ˜¯ä¸ºäº†ä¿è¯æŒ‰é’®å¯ä»¥æ°´å¹³æ»¡å±
 		wl.width = ViewGroup.LayoutParams.MATCH_PARENT;
 		wl.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-		// ÉèÖÃÏÔÊ¾Î»ÖÃ
+		// è®¾ç½®æ˜¾ç¤ºä½ç½®
 		dialog.onWindowAttributesChanged(wl);
-		// ÉèÖÃµã»÷ÍâÎ§½âÉ¢
+		// è®¾ç½®ç‚¹å‡»å¤–å›´è§£æ•£
 		dialog.setCanceledOnTouchOutside(true);
 		dialog.show();
 	}
@@ -149,12 +149,12 @@ public class SettingActivity extends Activity {
 	}
 
 	/**
-	 * ÅÄÕÕºó²Ã¼ô
+	 * æ‹ç…§åè£å‰ª
 	 * 
 	 * @param data
-	 *            Ô­Ê¼Í¼Æ¬
+	 *            åŸå§‹å›¾ç‰‡
 	 * @param output
-	 *            ²Ã¼ôºóÍ¼Æ¬
+	 *            è£å‰ªåå›¾ç‰‡
 	 */
 	private void startActionCrop(Uri data) {
 		Intent intent = new Intent("com.android.camera.action.CROP");
@@ -169,12 +169,12 @@ public class SettingActivity extends Activity {
 		}
 		intent.putExtra("output", uri);
 		intent.putExtra("crop", "true");
-		intent.putExtra("aspectX", 1);// ²Ã¼ô¿ò±ÈÀı
+		intent.putExtra("aspectX", 1);// è£å‰ªæ¡†æ¯”ä¾‹
 		intent.putExtra("aspectY", 1);
-		intent.putExtra("outputX", CROP);// Êä³öÍ¼Æ¬´óĞ¡
+		intent.putExtra("outputX", CROP);// è¾“å‡ºå›¾ç‰‡å¤§å°
 		intent.putExtra("outputY", CROP);
-		intent.putExtra("scale", true);// È¥ºÚ±ß
-		intent.putExtra("scaleUpIfNeeded", true);// È¥ºÚ±ß
+		intent.putExtra("scale", true);// å»é»‘è¾¹
+		intent.putExtra("scaleUpIfNeeded", true);// å»é»‘è¾¹
 		startActivityForResult(intent, REQUEST_CODE_CROP);
 	}
 
@@ -184,7 +184,7 @@ public class SettingActivity extends Activity {
 		switch (requestCode) {
 
 		case REQUEST_CODE_takePhoto:
-			startActionCrop(takePhotoUri);// ÅÄÕÕºó²Ã¼ô
+			startActionCrop(takePhotoUri);// æ‹ç…§åè£å‰ª
 			
 			break;
 		
@@ -203,7 +203,7 @@ public class SettingActivity extends Activity {
 	}
 
 	/**
-	 * ÉÏ´«ĞÂÕÕÆ¬
+	 * ä¸Šä¼ æ–°ç…§ç‰‡
 	 */
 	private void uploadNewPhoto() {
 
@@ -212,7 +212,7 @@ public class SettingActivity extends Activity {
 
 				@Override
 				public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
-					Toast.makeText(SettingActivity.this, "ÉÏ´«³É¹¦" + new String(arg2), 1000 * 5).show();
+					Toast.makeText(SettingActivity.this, "ä¸Šä¼ æˆåŠŸ" + new String(arg2), 1000 * 5).show();
 				}
 
 				@Override
@@ -229,15 +229,15 @@ public class SettingActivity extends Activity {
 	}
 
 	public static Bitmap zoomImage(Bitmap bgimage, double newWidth, double newHeight) {
-		// »ñÈ¡Õâ¸öÍ¼Æ¬µÄ¿íºÍ¸ß
+		// è·å–è¿™ä¸ªå›¾ç‰‡çš„å®½å’Œé«˜
 		float width = bgimage.getWidth();
 		float height = bgimage.getHeight();
-		// ´´½¨²Ù×÷Í¼Æ¬ÓÃµÄmatrix¶ÔÏó
+		// åˆ›å»ºæ“ä½œå›¾ç‰‡ç”¨çš„matrixå¯¹è±¡
 		Matrix matrix = new Matrix();
-		// ¼ÆËã¿í¸ßËõ·ÅÂÊ
+		// è®¡ç®—å®½é«˜ç¼©æ”¾ç‡
 		float scaleWidth = ((float) newWidth) / width;
 		float scaleHeight = ((float) newHeight) / height;
-		// Ëõ·ÅÍ¼Æ¬¶¯×÷
+		// ç¼©æ”¾å›¾ç‰‡åŠ¨ä½œ
 		matrix.postScale(scaleWidth, scaleHeight);
 		Bitmap bitmap = Bitmap.createBitmap(bgimage, 0, 0, (int) width, (int) height, matrix, true);
 		return bitmap;

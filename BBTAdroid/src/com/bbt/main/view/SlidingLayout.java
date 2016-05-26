@@ -18,97 +18,97 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener {
 	
 	private static String TAG = "SlidingLayout";
 	/**
-	 * ¹ö¶¯ÏÔÊ¾ºÍÒş²Ø×ó²à²¼¾ÖÊ±£¬ÊÖÖ¸»¬¶¯ĞèÒª´ïµ½µÄËÙ¶È¡£
+	 * æ»šåŠ¨æ˜¾ç¤ºå’Œéšè—å·¦ä¾§å¸ƒå±€æ—¶ï¼Œæ‰‹æŒ‡æ»‘åŠ¨éœ€è¦è¾¾åˆ°çš„é€Ÿåº¦ã€‚
 	 */
 	public static final int SNAP_VELOCITY = 200;
 
 	/**
-	 * ÆÁÄ»¿í¶ÈÖµ¡£
+	 * å±å¹•å®½åº¦å€¼ã€‚
 	 */
 	private int screenWidth;
 
 	/**
-	 * ÓÒ²à²¼¾Ö×î¶à¿ÉÒÔ»¬¶¯µ½µÄ×ó±ßÔµ¡£
+	 * å³ä¾§å¸ƒå±€æœ€å¤šå¯ä»¥æ»‘åŠ¨åˆ°çš„å·¦è¾¹ç¼˜ã€‚
 	 */
 	private int leftEdge = 0;
 
 	/**
-	 * ÓÒ²à²¼¾Ö×î¶à¿ÉÒÔ»¬¶¯µ½µÄÓÒ±ßÔµ¡£
+	 * å³ä¾§å¸ƒå±€æœ€å¤šå¯ä»¥æ»‘åŠ¨åˆ°çš„å³è¾¹ç¼˜ã€‚
 	 */
 	private int rightEdge = 0;
 
 	/**
-	 * ÔÚ±»ÅĞ¶¨Îª¹ö¶¯Ö®Ç°ÓÃ»§ÊÖÖ¸¿ÉÒÔÒÆ¶¯µÄ×î´óÖµ¡£
+	 * åœ¨è¢«åˆ¤å®šä¸ºæ»šåŠ¨ä¹‹å‰ç”¨æˆ·æ‰‹æŒ‡å¯ä»¥ç§»åŠ¨çš„æœ€å¤§å€¼ã€‚
 	 */
 	private int touchSlop;
 
 	/**
-	 * ¼ÇÂ¼ÊÖÖ¸°´ÏÂÊ±µÄºá×ø±ê¡£
+	 * è®°å½•æ‰‹æŒ‡æŒ‰ä¸‹æ—¶çš„æ¨ªåæ ‡ã€‚
 	 */
 	private float xDown;
 
 	/**
-	 * ¼ÇÂ¼ÊÖÖ¸°´ÏÂÊ±µÄ×İ×ø±ê¡£
+	 * è®°å½•æ‰‹æŒ‡æŒ‰ä¸‹æ—¶çš„çºµåæ ‡ã€‚
 	 */
 	private float yDown;
 
 	/**
-	 * ¼ÇÂ¼ÊÖÖ¸ÒÆ¶¯Ê±µÄºá×ø±ê¡£
+	 * è®°å½•æ‰‹æŒ‡ç§»åŠ¨æ—¶çš„æ¨ªåæ ‡ã€‚
 	 */
 	private float xMove;
 
 	/**
-	 * ¼ÇÂ¼ÊÖÖ¸ÒÆ¶¯Ê±µÄ×İ×ø±ê¡£
+	 * è®°å½•æ‰‹æŒ‡ç§»åŠ¨æ—¶çš„çºµåæ ‡ã€‚
 	 */
 	private float yMove;
 
 	/**
-	 * ¼ÇÂ¼ÊÖ»úÌ§ÆğÊ±µÄºá×ø±ê¡£
+	 * è®°å½•æ‰‹æœºæŠ¬èµ·æ—¶çš„æ¨ªåæ ‡ã€‚
 	 */
 	private float xUp;
 
 	/**
-	 * ×ó²à²¼¾Öµ±Ç°ÊÇÏÔÊ¾»¹ÊÇÒş²Ø¡£Ö»ÓĞÍêÈ«ÏÔÊ¾»òÒş²ØÊ±²Å»á¸ü¸Ä´ËÖµ£¬»¬¶¯¹ı³ÌÖĞ´ËÖµÎŞĞ§¡£
+	 * å·¦ä¾§å¸ƒå±€å½“å‰æ˜¯æ˜¾ç¤ºè¿˜æ˜¯éšè—ã€‚åªæœ‰å®Œå…¨æ˜¾ç¤ºæˆ–éšè—æ—¶æ‰ä¼šæ›´æ”¹æ­¤å€¼ï¼Œæ»‘åŠ¨è¿‡ç¨‹ä¸­æ­¤å€¼æ— æ•ˆã€‚
 	 */
 	private boolean isLeftLayoutVisible;
 
 	/**
-	 * ÊÇ·ñÕıÔÚ»¬¶¯¡£
+	 * æ˜¯å¦æ­£åœ¨æ»‘åŠ¨ã€‚
 	 */
 	private boolean isSliding;
 
 	/**
-	 * ×ó²à²¼¾Ö¶ÔÏó¡£
+	 * å·¦ä¾§å¸ƒå±€å¯¹è±¡ã€‚
 	 */
 	private View leftLayout;
 
 	/**
-	 * ÓÒ²à²¼¾Ö¶ÔÏó¡£
+	 * å³ä¾§å¸ƒå±€å¯¹è±¡ã€‚
 	 */
 	private View rightLayout;
 
 	/**
-	 * ÓÃÓÚ¼àÌı²à»¬ÊÂ¼şµÄView¡£
+	 * ç”¨äºç›‘å¬ä¾§æ»‘äº‹ä»¶çš„Viewã€‚
 	 */
 	private View mBindView;
 
 	/**
-	 * ×ó²à²¼¾ÖµÄ²ÎÊı£¬Í¨¹ı´Ë²ÎÊıÀ´ÖØĞÂÈ·¶¨×ó²à²¼¾ÖµÄ¿í¶È£¬ÒÔ¼°¸ü¸ÄleftMarginµÄÖµ¡£
+	 * å·¦ä¾§å¸ƒå±€çš„å‚æ•°ï¼Œé€šè¿‡æ­¤å‚æ•°æ¥é‡æ–°ç¡®å®šå·¦ä¾§å¸ƒå±€çš„å®½åº¦ï¼Œä»¥åŠæ›´æ”¹leftMarginçš„å€¼ã€‚
 	 */
 	private MarginLayoutParams leftLayoutParams;
 
 	/**
-	 * ÓÒ²à²¼¾ÖµÄ²ÎÊı£¬Í¨¹ı´Ë²ÎÊıÀ´ÖØĞÂÈ·¶¨ÓÒ²à²¼¾ÖµÄ¿í¶È¡£
+	 * å³ä¾§å¸ƒå±€çš„å‚æ•°ï¼Œé€šè¿‡æ­¤å‚æ•°æ¥é‡æ–°ç¡®å®šå³ä¾§å¸ƒå±€çš„å®½åº¦ã€‚
 	 */
 	private MarginLayoutParams rightLayoutParams;
 
 	/**
-	 * ÓÃÓÚ¼ÆËãÊÖÖ¸»¬¶¯µÄËÙ¶È¡£
+	 * ç”¨äºè®¡ç®—æ‰‹æŒ‡æ»‘åŠ¨çš„é€Ÿåº¦ã€‚
 	 */
 	private VelocityTracker mVelocityTracker;
 
 	/**
-	 * ÖØĞ´SlidingLayoutµÄ¹¹Ôìº¯Êı£¬ÆäÖĞ»ñÈ¡ÁËÆÁÄ»µÄ¿í¶È¡£
+	 * é‡å†™SlidingLayoutçš„æ„é€ å‡½æ•°ï¼Œå…¶ä¸­è·å–äº†å±å¹•çš„å®½åº¦ã€‚
 	 * 
 	 * @param context
 	 * @param attrs
@@ -123,10 +123,10 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener {
 	}
 
 	/**
-	 * °ó¶¨¼àÌı²à»¬ÊÂ¼şµÄView£¬¼´ÔÚ°ó¶¨µÄView½øĞĞ»¬¶¯²Å¿ÉÒÔÏÔÊ¾ºÍÒş²Ø×ó²à²¼¾Ö¡£
+	 * ç»‘å®šç›‘å¬ä¾§æ»‘äº‹ä»¶çš„Viewï¼Œå³åœ¨ç»‘å®šçš„Viewè¿›è¡Œæ»‘åŠ¨æ‰å¯ä»¥æ˜¾ç¤ºå’Œéšè—å·¦ä¾§å¸ƒå±€ã€‚
 	 * 
 	 * @param bindView
-	 *            ĞèÒª°ó¶¨µÄView¶ÔÏó¡£
+	 *            éœ€è¦ç»‘å®šçš„Viewå¯¹è±¡ã€‚
 	 */
 	public void setScrollEvent(View bindView) {
 		mBindView = bindView;
@@ -134,40 +134,40 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener {
 	}
 
 	/**
-	 * ½«ÆÁÄ»¹ö¶¯µ½×ó²à²¼¾Ö½çÃæ£¬¹ö¶¯ËÙ¶ÈÉè¶¨Îª30.
+	 * å°†å±å¹•æ»šåŠ¨åˆ°å·¦ä¾§å¸ƒå±€ç•Œé¢ï¼Œæ»šåŠ¨é€Ÿåº¦è®¾å®šä¸º30.
 	 */
 	public void scrollToLeftLayout() {
 		new ScrollTask().execute(-30);
 	}
 
 	/**
-	 * ½«ÆÁÄ»¹ö¶¯µ½ÓÒ²à²¼¾Ö½çÃæ£¬¹ö¶¯ËÙ¶ÈÉè¶¨Îª-30.
+	 * å°†å±å¹•æ»šåŠ¨åˆ°å³ä¾§å¸ƒå±€ç•Œé¢ï¼Œæ»šåŠ¨é€Ÿåº¦è®¾å®šä¸º-30.
 	 */
 	public void scrollToRightLayout() {
 		new ScrollTask().execute(30);
 	}
 
 	/**
-	 * ×ó²à²¼¾ÖÊÇ·ñÍêÈ«ÏÔÊ¾³öÀ´£¬»òÍêÈ«Òş²Ø£¬»¬¶¯¹ı³ÌÖĞ´ËÖµÎŞĞ§¡£
+	 * å·¦ä¾§å¸ƒå±€æ˜¯å¦å®Œå…¨æ˜¾ç¤ºå‡ºæ¥ï¼Œæˆ–å®Œå…¨éšè—ï¼Œæ»‘åŠ¨è¿‡ç¨‹ä¸­æ­¤å€¼æ— æ•ˆã€‚
 	 * 
-	 * @return ×ó²à²¼¾ÖÍêÈ«ÏÔÊ¾·µ»Øtrue£¬ÍêÈ«Òş²Ø·µ»Øfalse¡£
+	 * @return å·¦ä¾§å¸ƒå±€å®Œå…¨æ˜¾ç¤ºè¿”å›trueï¼Œå®Œå…¨éšè—è¿”å›falseã€‚
 	 */
 	public boolean isLeftLayoutVisible() {
 		return isLeftLayoutVisible;
 	}
 
 	/**
-	 * ÔÚonLayoutÖĞÖØĞÂÉè¶¨×ó²à²¼¾ÖºÍÓÒ²à²¼¾ÖµÄ²ÎÊı¡£
+	 * åœ¨onLayoutä¸­é‡æ–°è®¾å®šå·¦ä¾§å¸ƒå±€å’Œå³ä¾§å¸ƒå±€çš„å‚æ•°ã€‚
 	 */
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		super.onLayout(changed, l, t, r, b);
 		if (changed) {
-			// »ñÈ¡×ó²à²¼¾Ö¶ÔÏó
+			// è·å–å·¦ä¾§å¸ƒå±€å¯¹è±¡
 			leftLayout = getChildAt(0);
 			leftLayoutParams = (MarginLayoutParams) leftLayout.getLayoutParams();
 			rightEdge = -leftLayoutParams.width;
-			// »ñÈ¡ÓÒ²à²¼¾Ö¶ÔÏó
+			// è·å–å³ä¾§å¸ƒå±€å¯¹è±¡
 			rightLayout = getChildAt(1);
 			rightLayoutParams = (MarginLayoutParams) rightLayout.getLayoutParams();
 			rightLayoutParams.width = screenWidth;
@@ -185,13 +185,13 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener {
 		}
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			// ÊÖÖ¸°´ÏÂÊ±£¬¼ÇÂ¼°´ÏÂÊ±µÄºá×ø±ê
+			// æ‰‹æŒ‡æŒ‰ä¸‹æ—¶ï¼Œè®°å½•æŒ‰ä¸‹æ—¶çš„æ¨ªåæ ‡
 			Log.d(TAG, "onTouch down");
 			xDown = event.getRawX();
 			yDown = event.getRawY();
 			break;
 		case MotionEvent.ACTION_MOVE:
-			// ÊÖÖ¸ÒÆ¶¯Ê±£¬¶Ô±È°´ÏÂÊ±µÄºá×ø±ê£¬¼ÆËã³öÒÆ¶¯µÄ¾àÀë£¬À´µ÷ÕûÓÒ²à²¼¾ÖµÄleftMarginÖµ£¬´Ó¶øÏÔÊ¾ºÍÒş²Ø×ó²à²¼¾Ö
+			// æ‰‹æŒ‡ç§»åŠ¨æ—¶ï¼Œå¯¹æ¯”æŒ‰ä¸‹æ—¶çš„æ¨ªåæ ‡ï¼Œè®¡ç®—å‡ºç§»åŠ¨çš„è·ç¦»ï¼Œæ¥è°ƒæ•´å³ä¾§å¸ƒå±€çš„leftMarginå€¼ï¼Œä»è€Œæ˜¾ç¤ºå’Œéšè—å·¦ä¾§å¸ƒå±€
 			Log.d(TAG, "onTouch move");
 			xMove = event.getRawX();
 			yMove = event.getRawY();
@@ -220,7 +220,7 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener {
 			int upDistanceX = (int) (xUp - xDown);
 			if (isSliding) {
 				Log.d(TAG, "sliding slidingLayout"+isSliding);
-				// ÊÖÖ¸Ì§ÆğÊ±£¬½øĞĞÅĞ¶Ïµ±Ç°ÊÖÊÆµÄÒâÍ¼£¬´Ó¶ø¾ö¶¨ÊÇ¹ö¶¯µ½×ó²à²¼¾Ö£¬»¹ÊÇ¹ö¶¯µ½ÓÒ²à²¼¾Ö
+				// æ‰‹æŒ‡æŠ¬èµ·æ—¶ï¼Œè¿›è¡Œåˆ¤æ–­å½“å‰æ‰‹åŠ¿çš„æ„å›¾ï¼Œä»è€Œå†³å®šæ˜¯æ»šåŠ¨åˆ°å·¦ä¾§å¸ƒå±€ï¼Œè¿˜æ˜¯æ»šåŠ¨åˆ°å³ä¾§å¸ƒå±€
 				if (wantToShowLeftLayout()) {
 					if (shouldScrollToLeftLayout()) {
 						scrollToLeftLayout();
@@ -254,48 +254,48 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener {
 	}
 
 	/**
-	 * ÅĞ¶Ïµ±Ç°ÊÖÊÆµÄÒâÍ¼ÊÇ²»ÊÇÏëÏÔÊ¾ÓÒ²à²¼¾Ö¡£Èç¹ûÊÖÖ¸ÒÆ¶¯µÄ¾àÀëÊÇ¸ºÊı£¬ÇÒµ±Ç°×ó²à²¼¾ÖÊÇ¿É¼ûµÄ£¬ÔòÈÏÎªµ±Ç°ÊÖÊÆÊÇÏëÒªÏÔÊ¾ÓÒ²à²¼¾Ö¡£
+	 * åˆ¤æ–­å½“å‰æ‰‹åŠ¿çš„æ„å›¾æ˜¯ä¸æ˜¯æƒ³æ˜¾ç¤ºå³ä¾§å¸ƒå±€ã€‚å¦‚æœæ‰‹æŒ‡ç§»åŠ¨çš„è·ç¦»æ˜¯è´Ÿæ•°ï¼Œä¸”å½“å‰å·¦ä¾§å¸ƒå±€æ˜¯å¯è§çš„ï¼Œåˆ™è®¤ä¸ºå½“å‰æ‰‹åŠ¿æ˜¯æƒ³è¦æ˜¾ç¤ºå³ä¾§å¸ƒå±€ã€‚
 	 * 
-	 * @return µ±Ç°ÊÖÊÆÏëÏÔÊ¾ÓÒ²à²¼¾Ö·µ»Øtrue£¬·ñÔò·µ»Øfalse¡£
+	 * @return å½“å‰æ‰‹åŠ¿æƒ³æ˜¾ç¤ºå³ä¾§å¸ƒå±€è¿”å›trueï¼Œå¦åˆ™è¿”å›falseã€‚
 	 */
 	private boolean wantToShowRightLayout() {
 		return xUp - xDown < 0 && isLeftLayoutVisible;
 	}
 
 	/**
-	 * ÅĞ¶Ïµ±Ç°ÊÖÊÆµÄÒâÍ¼ÊÇ²»ÊÇÏëÏÔÊ¾×ó²à²¼¾Ö¡£Èç¹ûÊÖÖ¸ÒÆ¶¯µÄ¾àÀëÊÇÕıÊı£¬ÇÒµ±Ç°×ó²à²¼¾ÖÊÇ²»¿É¼ûµÄ£¬ÔòÈÏÎªµ±Ç°ÊÖÊÆÊÇÏëÒªÏÔÊ¾×ó²à²¼¾Ö¡£
+	 * åˆ¤æ–­å½“å‰æ‰‹åŠ¿çš„æ„å›¾æ˜¯ä¸æ˜¯æƒ³æ˜¾ç¤ºå·¦ä¾§å¸ƒå±€ã€‚å¦‚æœæ‰‹æŒ‡ç§»åŠ¨çš„è·ç¦»æ˜¯æ­£æ•°ï¼Œä¸”å½“å‰å·¦ä¾§å¸ƒå±€æ˜¯ä¸å¯è§çš„ï¼Œåˆ™è®¤ä¸ºå½“å‰æ‰‹åŠ¿æ˜¯æƒ³è¦æ˜¾ç¤ºå·¦ä¾§å¸ƒå±€ã€‚
 	 * 
-	 * @return µ±Ç°ÊÖÊÆÏëÏÔÊ¾×ó²à²¼¾Ö·µ»Øtrue£¬·ñÔò·µ»Øfalse¡£
+	 * @return å½“å‰æ‰‹åŠ¿æƒ³æ˜¾ç¤ºå·¦ä¾§å¸ƒå±€è¿”å›trueï¼Œå¦åˆ™è¿”å›falseã€‚
 	 */
 	private boolean wantToShowLeftLayout() {
 		return xUp - xDown > 0 && !isLeftLayoutVisible;
 	}
 
 	/**
-	 * ÅĞ¶ÏÊÇ·ñÓ¦¸Ã¹ö¶¯½«×ó²à²¼¾ÖÕ¹Ê¾³öÀ´¡£Èç¹ûÊÖÖ¸ÒÆ¶¯¾àÀë´óÓÚÆÁÄ»µÄ1/2£¬»òÕßÊÖÖ¸ÒÆ¶¯ËÙ¶È´óÓÚSNAP_VELOCITY£¬
-	 * ¾ÍÈÏÎªÓ¦¸Ã¹ö¶¯½«×ó²à²¼¾ÖÕ¹Ê¾³öÀ´¡£
+	 * åˆ¤æ–­æ˜¯å¦åº”è¯¥æ»šåŠ¨å°†å·¦ä¾§å¸ƒå±€å±•ç¤ºå‡ºæ¥ã€‚å¦‚æœæ‰‹æŒ‡ç§»åŠ¨è·ç¦»å¤§äºå±å¹•çš„1/2ï¼Œæˆ–è€…æ‰‹æŒ‡ç§»åŠ¨é€Ÿåº¦å¤§äºSNAP_VELOCITYï¼Œ
+	 * å°±è®¤ä¸ºåº”è¯¥æ»šåŠ¨å°†å·¦ä¾§å¸ƒå±€å±•ç¤ºå‡ºæ¥ã€‚
 	 * 
-	 * @return Èç¹ûÓ¦¸Ã¹ö¶¯½«×ó²à²¼¾ÖÕ¹Ê¾³öÀ´·µ»Øtrue£¬·ñÔò·µ»Øfalse¡£
+	 * @return å¦‚æœåº”è¯¥æ»šåŠ¨å°†å·¦ä¾§å¸ƒå±€å±•ç¤ºå‡ºæ¥è¿”å›trueï¼Œå¦åˆ™è¿”å›falseã€‚
 	 */
 	private boolean shouldScrollToLeftLayout() {
 		return xUp - xDown > leftLayoutParams.width / 2 || getScrollVelocity() > SNAP_VELOCITY;
 	}
 
 	/**
-	 * ÅĞ¶ÏÊÇ·ñÓ¦¸Ã¹ö¶¯½«ÓÒ²à²¼¾ÖÕ¹Ê¾³öÀ´¡£Èç¹ûÊÖÖ¸ÒÆ¶¯¾àÀë¼ÓÉÏleftLayoutPadding´óÓÚÆÁÄ»µÄ1/2£¬
-	 * »òÕßÊÖÖ¸ÒÆ¶¯ËÙ¶È´óÓÚSNAP_VELOCITY£¬ ¾ÍÈÏÎªÓ¦¸Ã¹ö¶¯½«ÓÒ²à²¼¾ÖÕ¹Ê¾³öÀ´¡£
+	 * åˆ¤æ–­æ˜¯å¦åº”è¯¥æ»šåŠ¨å°†å³ä¾§å¸ƒå±€å±•ç¤ºå‡ºæ¥ã€‚å¦‚æœæ‰‹æŒ‡ç§»åŠ¨è·ç¦»åŠ ä¸ŠleftLayoutPaddingå¤§äºå±å¹•çš„1/2ï¼Œ
+	 * æˆ–è€…æ‰‹æŒ‡ç§»åŠ¨é€Ÿåº¦å¤§äºSNAP_VELOCITYï¼Œ å°±è®¤ä¸ºåº”è¯¥æ»šåŠ¨å°†å³ä¾§å¸ƒå±€å±•ç¤ºå‡ºæ¥ã€‚
 	 * 
-	 * @return Èç¹ûÓ¦¸Ã¹ö¶¯½«ÓÒ²à²¼¾ÖÕ¹Ê¾³öÀ´·µ»Øtrue£¬·ñÔò·µ»Øfalse¡£
+	 * @return å¦‚æœåº”è¯¥æ»šåŠ¨å°†å³ä¾§å¸ƒå±€å±•ç¤ºå‡ºæ¥è¿”å›trueï¼Œå¦åˆ™è¿”å›falseã€‚
 	 */
 	private boolean shouldScrollToRightLayout() {
 		return xDown - xUp > leftLayoutParams.width / 2 || getScrollVelocity() > SNAP_VELOCITY;
 	}
 
 	/**
-	 * ´´½¨VelocityTracker¶ÔÏó£¬²¢½«´¥ÃşÊÂ¼ş¼ÓÈëµ½VelocityTrackerµ±ÖĞ¡£
+	 * åˆ›å»ºVelocityTrackerå¯¹è±¡ï¼Œå¹¶å°†è§¦æ‘¸äº‹ä»¶åŠ å…¥åˆ°VelocityTrackerå½“ä¸­ã€‚
 	 * 
 	 * @param event
-	 *            ÓÒ²à²¼¾Ö¼àÌı¿Ø¼şµÄ»¬¶¯ÊÂ¼ş
+	 *            å³ä¾§å¸ƒå±€ç›‘å¬æ§ä»¶çš„æ»‘åŠ¨äº‹ä»¶
 	 */
 	private void createVelocityTracker(MotionEvent event) {
 		if (mVelocityTracker == null) {
@@ -305,9 +305,9 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener {
 	}
 
 	/**
-	 * »ñÈ¡ÊÖÖ¸ÔÚÓÒ²à²¼¾ÖµÄ¼àÌıViewÉÏµÄ»¬¶¯ËÙ¶È¡£
+	 * è·å–æ‰‹æŒ‡åœ¨å³ä¾§å¸ƒå±€çš„ç›‘å¬Viewä¸Šçš„æ»‘åŠ¨é€Ÿåº¦ã€‚
 	 * 
-	 * @return »¬¶¯ËÙ¶È£¬ÒÔÃ¿ÃëÖÓÒÆ¶¯ÁË¶àÉÙÏñËØÖµÎªµ¥Î»¡£
+	 * @return æ»‘åŠ¨é€Ÿåº¦ï¼Œä»¥æ¯ç§’é’Ÿç§»åŠ¨äº†å¤šå°‘åƒç´ å€¼ä¸ºå•ä½ã€‚
 	 */
 	private int getScrollVelocity() {
 		mVelocityTracker.computeCurrentVelocity(1000);
@@ -316,7 +316,7 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener {
 	}
 
 	/**
-	 * »ØÊÕVelocityTracker¶ÔÏó¡£
+	 * å›æ”¶VelocityTrackerå¯¹è±¡ã€‚
 	 */
 	private void recycleVelocityTracker() {
 		mVelocityTracker.recycle();
@@ -324,7 +324,7 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener {
 	}
 
 	/**
-	 * Ê¹ÓÃ¿ÉÒÔ»ñµÃ½¹µãµÄ¿Ø¼şÔÚ»¬¶¯µÄÊ±ºòÊ§È¥½¹µã¡£
+	 * ä½¿ç”¨å¯ä»¥è·å¾—ç„¦ç‚¹çš„æ§ä»¶åœ¨æ»‘åŠ¨çš„æ—¶å€™å¤±å»ç„¦ç‚¹ã€‚
 	 */
 	private void unFocusBindView() {
 		if (mBindView != null) {
@@ -339,7 +339,7 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener {
 		@Override
 		protected Integer doInBackground(Integer... speed) {
 			int rightMargin = rightLayoutParams.rightMargin;
-			// ¸ù¾İ´«ÈëµÄËÙ¶ÈÀ´¹ö¶¯½çÃæ£¬µ±¹ö¶¯µ½´ï×ó±ß½ç»òÓÒ±ß½çÊ±£¬Ìø³öÑ­»·¡£
+			// æ ¹æ®ä¼ å…¥çš„é€Ÿåº¦æ¥æ»šåŠ¨ç•Œé¢ï¼Œå½“æ»šåŠ¨åˆ°è¾¾å·¦è¾¹ç•Œæˆ–å³è¾¹ç•Œæ—¶ï¼Œè·³å‡ºå¾ªç¯ã€‚
 			while (true) {
 				rightMargin = rightMargin + speed[0];
 				if (rightMargin < rightEdge) {
@@ -351,7 +351,7 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener {
 					break;
 				}
 				publishProgress(rightMargin);
-				// ÎªÁËÒªÓĞ¹ö¶¯Ğ§¹û²úÉú£¬Ã¿´ÎÑ­»·Ê¹Ïß³ÌË¯Ãß20ºÁÃë£¬ÕâÑùÈâÑÛ²ÅÄÜ¹»¿´µ½¹ö¶¯¶¯»­¡£
+				// ä¸ºäº†è¦æœ‰æ»šåŠ¨æ•ˆæœäº§ç”Ÿï¼Œæ¯æ¬¡å¾ªç¯ä½¿çº¿ç¨‹ç¡çœ 20æ¯«ç§’ï¼Œè¿™æ ·è‚‰çœ¼æ‰èƒ½å¤Ÿçœ‹åˆ°æ»šåŠ¨åŠ¨ç”»ã€‚
 				sleep(15);
 			}
 			if (speed[0] > 0) {
@@ -378,10 +378,10 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener {
 	}
 
 	/**
-	 * Ê¹µ±Ç°Ïß³ÌË¯ÃßÖ¸¶¨µÄºÁÃëÊı¡£
+	 * ä½¿å½“å‰çº¿ç¨‹ç¡çœ æŒ‡å®šçš„æ¯«ç§’æ•°ã€‚
 	 * 
 	 * @param millis
-	 *            Ö¸¶¨µ±Ç°Ïß³ÌË¯Ãß¶à¾Ã£¬ÒÔºÁÃëÎªµ¥Î»
+	 *            æŒ‡å®šå½“å‰çº¿ç¨‹ç¡çœ å¤šä¹…ï¼Œä»¥æ¯«ç§’ä¸ºå•ä½
 	 */
 	private void sleep(long millis) {
 		try {

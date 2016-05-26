@@ -7,7 +7,7 @@ import com.avos.avoscloud.AVObject;
 public class OrderCase extends AVObject{
 
 
-	// ¶©µ¥£¨¶©µ¥id£¬ÀàĞÍ£¬×´Ì¬£¬Ä¿µÄµØÖ·£¬·¢µ¥Õßid£¬½Óµ¥Õßid,ä¯ÀÀ´ÎÊı£¬ÅÜÍÈ½ğ¶î£¬·¢ÉúÊ±¼ä£¬½áÊøÊ±¼ä,¸¶¿î·½Ê½£©	
+	// è®¢å•ï¼ˆè®¢å•idï¼Œç±»å‹ï¼ŒçŠ¶æ€ï¼Œç›®çš„åœ°å€ï¼Œå‘å•è€…idï¼Œæ¥å•è€…id,æµè§ˆæ¬¡æ•°ï¼Œè·‘è…¿é‡‘é¢ï¼Œå‘ç”Ÿæ—¶é—´ï¼Œç»“æŸæ—¶é—´,ä»˜æ¬¾æ–¹å¼ï¼‰	
     public static final String ORDER_TYPE = "order_type";
     public static final String ORDER_STATUS = "order_status";
     public static final String ADDRESS = "address";

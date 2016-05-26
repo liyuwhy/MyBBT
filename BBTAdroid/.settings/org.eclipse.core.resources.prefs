@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/com/bbt/json/bean/User.java=UTF-8
 encoding//src/com/bbt/main/base/ListBaseAdapter.java=UTF-8
 encoding//src/com/bbt/main/inter/BaseFragmentInterface.java=UTF-8
 encoding//src/com/bbt/main/inter/BaseViewInterface.java=UTF-8
@@ -7,6 +8,8 @@ encoding//src/com/bbt/main/tool/HttpClientHelper.java=UTF-8
 encoding//src/com/bbt/main/tool/StringUtils.java=UTF-8
 encoding//src/com/bbt/main/ui/Adapt/ListBaseAdapter.java=UTF-8
 encoding//src/com/bbt/main/ui/fragment/HomeFragment.java=UTF-8
+encoding//src/com/bbt/main/ui/side/LoginActivity.java=UTF-8
 encoding//src/com/bbt/main/ui/side/Order_Activity.java=UTF-8
 encoding//src/com/bbt/main/view/BannerLayout.java=UTF-8
 encoding//src/com/bbt/main/view/CircleImageView.java=UTF-8
+encoding/<project>=UTF-8

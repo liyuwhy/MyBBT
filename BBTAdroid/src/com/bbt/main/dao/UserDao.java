@@ -34,7 +34,7 @@ public class UserDao {
 		});
 	}
 
-	// ×¢²á
+	// æ³¨å†Œ
 	public static void signUp(String username, String password, String email, SignUpCallback signUpCallback) {
 		AVUser user = new AVUser();
 		user.setUsername(username);
@@ -43,18 +43,18 @@ public class UserDao {
 		user.signUpInBackground(signUpCallback);
 	}
 
-	// ×¢²á
+	// æ³¨å†Œ
 	public static void signUp(User myUser, SignUpCallback callback) {
 		AVUser avUser = User.parseToAVUser(myUser);
 		avUser.signUpInBackground(callback);
 	}
 
-	// µÇÂ¼ °ÑphoneNumber µ±usernameÊ¹ÓÃ
+	// ç™»å½• æŠŠphoneNumber å½“usernameä½¿ç”¨
 	public static void login(String phoneNumber, String password, LogInCallback<AVUser> callback) {
 		AVUser.loginByMobilePhoneNumberInBackground(phoneNumber, password, callback);
 	}
 
-	// ×¢Ïú
+	// æ³¨é”€
 	public static void logout() {
 		AVUser.logOut();
 	}
@@ -89,7 +89,7 @@ public class UserDao {
 		}
 	}
 
-	// ÎÄ¼şÉÏ´«
+	// æ–‡ä»¶ä¸Šä¼ 
 	public static void fileUploadToAV() {
 		try {
 			final AVFile file = AVFile.withAbsoluteLocalPath("LeanCloud.png",
@@ -97,13 +97,13 @@ public class UserDao {
 			file.saveInBackground(new SaveCallback() {
 				@Override
 				public void done(AVException e) {
-					// ³É¹¦»òÊ§°Ü´¦Àí...
+					// æˆåŠŸæˆ–å¤±è´¥å¤„ç†...
 					file.getUrl();
 				}
 			}, new ProgressCallback() {
 				@Override
 				public void done(Integer integer) {
-					// ÉÏ´«½ø¶ÈÊı¾İ£¬integer ½éÓÚ 0 ºÍ 100¡£
+					// ä¸Šä¼ è¿›åº¦æ•°æ®ï¼Œinteger ä»‹äº 0 å’Œ 100ã€‚
 				}
 			});
 		} catch (FileNotFoundException e) {

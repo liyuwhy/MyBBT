@@ -48,9 +48,9 @@ public class RegisterActivity extends BaseActivity {
 				String code = jsonObject.getString("code");
 				if (code.equals("200")) {
 					System.out.println("01226454949494");
-					Toast.makeText(RegisterActivity.this, "×¢²á³É¹¦", Toast.LENGTH_SHORT).show();
+					Toast.makeText(RegisterActivity.this, "æ³¨å†ŒæˆåŠŸ", Toast.LENGTH_SHORT).show();
 				} else if (code.equals("101")) {
-					Toast.makeText(RegisterActivity.this, "×¢²áÊ§°Ü", Toast.LENGTH_SHORT).show();
+					Toast.makeText(RegisterActivity.this, "æ³¨å†Œå¤±è´¥", Toast.LENGTH_SHORT).show();
 				}
 
 			} catch (JSONException e) {
@@ -80,9 +80,9 @@ public class RegisterActivity extends BaseActivity {
 			public void onClick(View v) {
 				String sex = "f";
 				if (btnNan.isChecked()) {
-					sex = "ÄĞ";
+					sex = "ç”·";
 				} else if (btnNv.isChecked()) {
-					sex = "Å®";
+					sex = "å¥³";
 				}
 				final Map<String, Object> map = new HashMap<String, Object>();
 

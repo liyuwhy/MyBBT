@@ -12,7 +12,7 @@ public class BBTApp extends Application{
 	public void onCreate() {
 		super.onCreate();
 		
-		//³õÊ¼»¯
+		//åˆå§‹åŒ–
 		ApiHttpClient.client = new AsyncHttpClient();
 		AVOSCloud.initialize(this, "ymmdgvbnxkxtgmbg4k4iw0o47utc0h57r5lh4f4otxlct2ny", "geioho2v3r2cdmdzsji3cr34lospqaa28jahyzvx6zvnv5zi");
 	}

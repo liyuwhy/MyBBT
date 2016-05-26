@@ -5,26 +5,26 @@ import com.avos.avoscloud.AVUser;
 
 public class User {
 
-	// ? ÔõÃ´ÓÃÓÃ»§ÃûºÍphonenumÒ»ÖÂ
+	// ? æ€ä¹ˆç”¨ç”¨æˆ·åå’Œphonenumä¸€è‡´
 	
 	public static final String SEX = "sex";
 	public static final String STU_NUM = "stu_num";
-	//êÇ³Æ
+	//æ˜µç§°
 	public static final String Person_Name = "person_name";
 	
 	
 
-	// ÓÃ»§Ãû
+	// ç”¨æˆ·å
 	private String username;
 
-	// ÃÜÂë
+	// å¯†ç 
 	private String password;
-	// µç»°ºÅÂë
+	// ç”µè¯å·ç 
 	private String phoneNum;
-	// ĞÔ±ğ
+	// æ€§åˆ«
 	private String sex;
 	private String realname;
-	// Ñ§ºÅ
+	// å­¦å·
 	private String stuNum;
 	
 	public User() {
@@ -93,7 +93,7 @@ public class User {
 
 	public static AVUser parseToAVUser(User user) {
 		AVUser avUser = new AVUser();
-		// Ê¹ÓÃµç»°ºÅÂëµ±ÓÃ»§Ãû
+		// ä½¿ç”¨ç”µè¯å·ç å½“ç”¨æˆ·å
 		avUser.setUsername(user.getUsername());
 		avUser.setPassword(user.getPassword());
 		avUser.setMobilePhoneNumber(user.getPhoneNum());

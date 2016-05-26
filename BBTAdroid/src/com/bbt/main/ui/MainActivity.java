@@ -78,8 +78,8 @@ public class MainActivity extends SlidingFragmentActivity {
 
 		initFragment(savedInstanceState);
 		// initUserInfo();
-		new ActionBarBuilder(this).setLeftGone().setTitleText("°ï°ïÌÃ");
-		// ³õÊ¼»¯Ä¬ÈÏÍ¼Æ¬
+		new ActionBarBuilder(this).setLeftGone().setTitleText("å¸®å¸®å ‚");
+		// åˆå§‹åŒ–é»˜è®¤å›¾ç‰‡
 		// getDefaultImgHead();
 	}
 
@@ -102,30 +102,30 @@ public class MainActivity extends SlidingFragmentActivity {
 	}
 
 	/**
-	 * ³õÊ¼»¯²à±ßÀ¸
+	 * åˆå§‹åŒ–ä¾§è¾¹æ 
 	 */
 	private void initSlidingMenu(Bundle savedInstanceState) {
 
-		// Èç¹û±£´æµÄ×´Ì¬²»Îª¿ÕÔòµÃµ½Ö®Ç°±£´æµÄFragment£¬·ñÔòÊµÀı»¯MyFragment
+		// å¦‚æœä¿å­˜çš„çŠ¶æ€ä¸ä¸ºç©ºåˆ™å¾—åˆ°ä¹‹å‰ä¿å­˜çš„Fragmentï¼Œå¦åˆ™å®ä¾‹åŒ–MyFragment
 
-		// ÉèÖÃ×ó²à»¬¶¯²Ëµ¥
+		// è®¾ç½®å·¦ä¾§æ»‘åŠ¨èœå•
 		setBehindContentView(R.layout.layout_menu);
 
 		mSlidingMenu = getSlidingMenu();
-		// ÉèÖÃ¿ÉÒÔ×óÓÒ»¬¶¯µÄ²Ëµ¥
+		// è®¾ç½®å¯ä»¥å·¦å³æ»‘åŠ¨çš„èœå•
 		mSlidingMenu.setMode(SlidingMenu.LEFT);
-		// ÉèÖÃ»¬¶¯ÒõÓ°µÄ¿í¶È
+		// è®¾ç½®æ»‘åŠ¨é˜´å½±çš„å®½åº¦
 		mSlidingMenu.setShadowWidthRes(R.dimen.shadow_width);
-		// ÉèÖÃ»¬¶¯²Ëµ¥ÒõÓ°µÄÍ¼Ïñ×ÊÔ´
+		// è®¾ç½®æ»‘åŠ¨èœå•é˜´å½±çš„å›¾åƒèµ„æº
 		mSlidingMenu.setShadowDrawable(null);
-		// ÉèÖÃ»¬¶¯²Ëµ¥ÊÓÍ¼µÄ¿í¶È
+		// è®¾ç½®æ»‘åŠ¨èœå•è§†å›¾çš„å®½åº¦
 		mSlidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-		// ÉèÖÃ½¥Èë½¥³öĞ§¹ûµÄÖµ
+		// è®¾ç½®æ¸å…¥æ¸å‡ºæ•ˆæœçš„å€¼
 		mSlidingMenu.setFadeDegree(0.35f);
 		mSlidingMenu.setAnimation(null);
-		// ÉèÖÃ´¥ÃşÆÁÄ»µÄÄ£Ê½,ÕâÀïÉèÖÃÎªÈ«ÆÁ
+		// è®¾ç½®è§¦æ‘¸å±å¹•çš„æ¨¡å¼,è¿™é‡Œè®¾ç½®ä¸ºå…¨å±
 		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
-		// ÉèÖÃÏÂ·½ÊÓÍ¼µÄÔÚ¹ö¶¯Ê±µÄËõ·Å±ÈÀı
+		// è®¾ç½®ä¸‹æ–¹è§†å›¾çš„åœ¨æ»šåŠ¨æ—¶çš„ç¼©æ”¾æ¯”ä¾‹
 		mSlidingMenu.setBehindScrollScale(0.0f);
 
 	}
@@ -191,12 +191,12 @@ public class MainActivity extends SlidingFragmentActivity {
 		case R.id.id_btn_doing:
 			changeFragment(3);
 			break;
-		// µã»÷·¢¶©µ¥ -- ´ÓÏÂÃæ»¬¶¯³öÀ´½çÃæ
+		// ç‚¹å‡»å‘è®¢å• -- ä»ä¸‹é¢æ»‘åŠ¨å‡ºæ¥ç•Œé¢
 		case R.id.id_btn_order:
 			Intent intent = new Intent();
 			intent.setClass(this, ActionOrderActivity.class);
 			startActivity(intent);
-			// ÉèÖÃÇĞ»»¶¯»­£¬´ÓÓÒ±ß½øÈë£¬×ó±ßÍË³ö
+			// è®¾ç½®åˆ‡æ¢åŠ¨ç”»ï¼Œä»å³è¾¹è¿›å…¥ï¼Œå·¦è¾¹é€€å‡º
 			overridePendingTransition(R.anim.top_to_bottom, android.R.anim.fade_out);
 			break;
 		case R.id.menu_circle_img:

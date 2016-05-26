@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 
 public class SlidingMenu extends HorizontalScrollView {
 	/**
-	 * ÆÁÄ»¿í¶È
+	 * å±å¹•å®½åº¦
 	 */
 	private int mScreenWidth;
 	/**
@@ -21,7 +21,7 @@ public class SlidingMenu extends HorizontalScrollView {
 	 */
 	private int mMenuRightPadding = 50;
 	/**
-	 * ²Ëµ¥µÄ¿í¶È
+	 * èœå•çš„å®½åº¦
 	 */
 	private int mMenuWidth;
 	private int mHalfMenuWidth;
@@ -45,9 +45,9 @@ public class SlidingMenu extends HorizontalScrollView {
 			int attr = a.getIndex(i);
 			/*switch (attr) {
 			case R.styleable.SlidingMenu_rightPadding:
-				// Ä¬ÈÏ50
+				// é»˜è®¤50
 				mMenuRightPadding = a.getDimensionPixelSize(attr, (int) TypedValue
-						.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50f, getResources().getDisplayMetrics()));// Ä¬ÈÏÎª10DP
+						.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50f, getResources().getDisplayMetrics()));// é»˜è®¤ä¸º10DP
 				break;
 			}*/
 		}
@@ -57,7 +57,7 @@ public class SlidingMenu extends HorizontalScrollView {
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		/**
-		 * ÏÔÊ¾µÄÉèÖÃÒ»¸ö¿í¶È
+		 * æ˜¾ç¤ºçš„è®¾ç½®ä¸€ä¸ªå®½åº¦
 		 */
 		if (!once) {
 			LinearLayout wrapper = (LinearLayout) getChildAt(0);
@@ -81,7 +81,7 @@ public class SlidingMenu extends HorizontalScrollView {
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		super.onLayout(changed, l, t, r, b);
 		if (changed) {
-			// ½«²Ëµ¥Òş²Ø
+			// å°†èœå•éšè—
 			this.scrollTo(mMenuWidth, 0);
 			once = true;
 		}
@@ -91,7 +91,7 @@ public class SlidingMenu extends HorizontalScrollView {
 	public boolean onTouchEvent(MotionEvent ev) {
 		int action = ev.getAction();
 		switch (action) {
-		// UpÊ±£¬½øĞĞÅĞ¶Ï£¬Èç¹ûÏÔÊ¾ÇøÓò´óÓÚ²Ëµ¥¿í¶ÈÒ»°ëÔòÍêÈ«ÏÔÊ¾£¬·ñÔòÒş²Ø
+		// Upæ—¶ï¼Œè¿›è¡Œåˆ¤æ–­ï¼Œå¦‚æœæ˜¾ç¤ºåŒºåŸŸå¤§äºèœå•å®½åº¦ä¸€åŠåˆ™å®Œå…¨æ˜¾ç¤ºï¼Œå¦åˆ™éšè—
 		case MotionEvent.ACTION_UP:
 			int scrollX = getScrollX();
 			if (scrollX > mHalfMenuWidth) {
@@ -107,7 +107,7 @@ public class SlidingMenu extends HorizontalScrollView {
 	}
 
 	/**
-	 * ´ò¿ª²Ëµ¥
+	 * æ‰“å¼€èœå•
 	 */
 	public void openMenu() {
 		if (isOpen)
@@ -117,7 +117,7 @@ public class SlidingMenu extends HorizontalScrollView {
 	}
 
 	/**
-	 * ¹Ø±Õ²Ëµ¥
+	 * å…³é—­èœå•
 	 */
 	public void closeMenu() {
 		if (isOpen) {
@@ -127,7 +127,7 @@ public class SlidingMenu extends HorizontalScrollView {
 	}
 
 	/**
-	 * ÇĞ»»²Ëµ¥×´Ì¬
+	 * åˆ‡æ¢èœå•çŠ¶æ€
 	 */
 	public void toggle() {
 		if (isOpen) {

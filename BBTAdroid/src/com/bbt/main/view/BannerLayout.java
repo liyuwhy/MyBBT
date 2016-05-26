@@ -71,7 +71,7 @@ public class BannerLayout extends View{
      */
     public void show(){
     	
-    	// ? ÔõÃ´×Ô¶¯À´
+    	// ? æ€ä¹ˆè‡ªåŠ¨æ¥
     	
     	
        /*  Animation in = AnimationUtils.loadAnimation(this.mContext, android.R.anim.fade_in);*/

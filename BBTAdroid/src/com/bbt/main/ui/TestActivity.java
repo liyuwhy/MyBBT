@@ -23,10 +23,10 @@ public class TestActivity extends FragmentActivity{
 			@Override
 			public void done(AVException e) {
 				if (e == null) {
-	                 // ÑéÖ¤³É¹¦
-				   Toast.makeText(TestActivity.this, "·¢ËÍÑéÖ¤³É¹¦", 1000*5).show();
+	                 // éªŒè¯æˆåŠŸ
+				   Toast.makeText(TestActivity.this, "å‘é€éªŒè¯æˆåŠŸ", 1000*5).show();
 	             } else {
-	                 Toast.makeText(TestActivity.this, "·¢ËÍÑéÖ¤Ê§°Ü", 1000*5).show();
+	                 Toast.makeText(TestActivity.this, "å‘é€éªŒè¯å¤±è´¥", 1000*5).show();
 	             }
 			}
 		});*/
@@ -42,10 +42,10 @@ public class TestActivity extends FragmentActivity{
 				@Override
 				public void done(AVException e) {
 					   if (e == null) {
-			                 // ÑéÖ¤³É¹¦
-						   Toast.makeText(TestActivity.this, "ÑéÖ¤³É¹¦", 1000*5).show();
+			                 // éªŒè¯æˆåŠŸ
+						   Toast.makeText(TestActivity.this, "éªŒè¯æˆåŠŸ", 1000*5).show();
 			             } else {
-			                 Toast.makeText(TestActivity.this, "ÑéÖ¤Ê§°Ü", 1000*5).show();
+			                 Toast.makeText(TestActivity.this, "éªŒè¯å¤±è´¥", 1000*5).show();
 			             }
 					
 				}

@@ -41,7 +41,7 @@ public class BBTApi {
 		ApiHttpClient.post("register", params, handler);
 	}
 	
-	//·¢µ¥
+	//å‘å•
 	public static void sendOrder(RequestParams params,AsyncHttpResponseHandler handler){
 		ApiHttpClient.post("SendOrder", params, handler);
 	}

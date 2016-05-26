@@ -8,8 +8,8 @@ public class User {
 	 * 
 	 * 
 	 * "userInfo": { "active":"0", "credit":"0", "icon":"\\img\\default.jpg",
-	 * "money":0, "name":"ºÎ", "phone":"13155734537", "realname":"ºÎÍò´¨",
-	 * "registerTime":"2016-05-24 21:52:43", "sex":"ÄĞ", "stuNum":"11314010124",
+	 * "money":0, "name":"ä½•", "phone":"13155734537", "realname":"ä½•ä¸‡å·",
+	 * "registerTime":"2016-05-24 21:52:43", "sex":"ç”·", "stuNum":"11314010124",
 	 * "userId":"20160039" }
 	 */
 

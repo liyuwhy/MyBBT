@@ -34,7 +34,7 @@ public class DataToVOS {
 		 AVOSCloud.requestSMSCodeInBackground("15879245707", new RequestMobileCodeCallback() {
 	            @Override
 	            public void done(AVException e) {
-	                // ·¢ËÍÊ§°Ü¿ÉÒÔ²é¿´ e ÀïÃæÌá¹©µÄĞÅÏ¢
+	                // å‘é€å¤±è´¥å¯ä»¥æŸ¥çœ‹ e é‡Œé¢æä¾›çš„ä¿¡æ¯
 	            }
 	        });
 		
@@ -46,7 +46,7 @@ public class DataToVOS {
 	     user.setPassword("f32@ds*@&dsa");
 	     user.setEmail("hang@leancloud.rocks");
 
-	     // ÆäËûÊôĞÔ¿ÉÒÔÏñÆäËûAVObject¶ÔÏóÒ»ÑùÊ¹ÓÃput·½·¨Ìí¼Ó
+	     // å…¶ä»–å±æ€§å¯ä»¥åƒå…¶ä»–AVObjectå¯¹è±¡ä¸€æ ·ä½¿ç”¨putæ–¹æ³•æ·»åŠ 
 	     user.put("mobilePhoneNumber", "158-7924-5707");
           
 	     user.signUpInBackground(callBack);

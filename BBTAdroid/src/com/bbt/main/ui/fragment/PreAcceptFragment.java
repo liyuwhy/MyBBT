@@ -29,7 +29,7 @@ public class PreAcceptFragment extends BaseFragment
 	public static final int STATE_REFRESH = 1;
 	public static final int STATE_LOADMORE = 2;
 	public static final int STATE_NOMORE = 3;
-	public static final int STATE_PRESSNONE = 4;// ÕıÔÚÏÂÀ­µ«»¹Ã»ÓĞµ½Ë¢ĞÂµÄ×´Ì¬
+	public static final int STATE_PRESSNONE = 4;// æ­£åœ¨ä¸‹æ‹‰ä½†è¿˜æ²¡æœ‰åˆ°åˆ·æ–°çš„çŠ¶æ€
 	public static int mState = STATE_NONE;
 
 	private ListView mListView;
@@ -52,7 +52,7 @@ public class PreAcceptFragment extends BaseFragment
 		mSwipeRefreshLayout.setColorScheme(R.color.swiperefresh_color1, R.color.swiperefresh_color2,
 				R.color.swiperefresh_color3, R.color.swiperefresh_color4);
 
-		// ÏÔÊ¾ÕıÔÚ¼ÓÔØ
+		// æ˜¾ç¤ºæ­£åœ¨åŠ è½½
 
 		mListView.setOnItemClickListener(this);
 		mListView.setOnScrollListener(this);
@@ -71,14 +71,14 @@ public class PreAcceptFragment extends BaseFragment
 	@Override
 	public void onResume() {
 		super.onResume();
-		// TODO ¸ù¾İÒ»¶¨Ìõ¼şÅĞ¶ÏÊÇ·ñĞèÒªË¢ĞÂ
+		// TODO æ ¹æ®ä¸€å®šæ¡ä»¶åˆ¤æ–­æ˜¯å¦éœ€è¦åˆ·æ–°
 		onRefresh();
 	}
 
 	private void requestData() {
 
 		if (mState == STATE_LOADMORE) {
-			// ÏÂÀ­¼ÓÔØ¸ü¶à
+			// ä¸‹æ‹‰åŠ è½½æ›´å¤š
 
 			mAdapter.setState(ListBaseAdapter.STATE_LOAD_MORE);
 
@@ -96,8 +96,8 @@ public class PreAcceptFragment extends BaseFragment
 
 		} else {
 			// TODO Auto-generated method stub
-			// ¼ÓÔØÊı¾İ
-			// ¼ÓÔØÍê±Ïºó µ÷ÓÃ set
+			// åŠ è½½æ•°æ®
+			// åŠ è½½å®Œæ¯•å è°ƒç”¨ set
 			mSwipeRefreshLayout.postDelayed(new Runnable() {
 
 				@Override
@@ -119,7 +119,7 @@ public class PreAcceptFragment extends BaseFragment
 		if (mState == STATE_REFRESH) {
 			return;
 		}
-		// ÉèÖÃ¶¥²¿ÕıÔÚË¢ĞÂ
+		// è®¾ç½®é¡¶éƒ¨æ­£åœ¨åˆ·æ–°
 		mListView.setSelection(0);
 		setSwipeRefreshLoadingState();
 		mCurrentPage = 0;
@@ -130,13 +130,13 @@ public class PreAcceptFragment extends BaseFragment
 	private void setSwipeRefreshLoadingState() {
 		if (mSwipeRefreshLayout != null) {
 			mSwipeRefreshLayout.setRefreshing(true);
-			// ·ÀÖ¹¶à´ÎÖØ¸´Ë¢ĞÂ
+			// é˜²æ­¢å¤šæ¬¡é‡å¤åˆ·æ–°
 			mSwipeRefreshLayout.setEnabled(false);
 		}
 
 	}
 
-	/** ÉèÖÃ¶¥²¿¼ÓÔØÍê±ÏµÄ×´Ì¬ */
+	/** è®¾ç½®é¡¶éƒ¨åŠ è½½å®Œæ¯•çš„çŠ¶æ€ */
 	private void setSwipeRefreshLoadedState() {
 		if (mSwipeRefreshLayout != null) {
 			mSwipeRefreshLayout.setRefreshing(false);
@@ -149,7 +149,7 @@ public class PreAcceptFragment extends BaseFragment
 
 	}
 
-	// ÏÂÀ­¼ÓÔØ¸ü¶à
+	// ä¸‹æ‹‰åŠ è½½æ›´å¤š
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 
@@ -157,11 +157,11 @@ public class PreAcceptFragment extends BaseFragment
 		if (mAdapter == null || mAdapter.getCount() == 0) {
 			return;
 		}
-		// Êı¾İÒÑ¾­È«²¿¼ÓÔØ£¬»òÊı¾İÎª¿ÕÊ±£¬»òÕıÔÚ¼ÓÔØ£¬²»´¦Àí¹ö¶¯ÊÂ¼ş
+		// æ•°æ®å·²ç»å…¨éƒ¨åŠ è½½ï¼Œæˆ–æ•°æ®ä¸ºç©ºæ—¶ï¼Œæˆ–æ­£åœ¨åŠ è½½ï¼Œä¸å¤„ç†æ»šåŠ¨äº‹ä»¶
 		if (mState == STATE_LOADMORE || mState == STATE_REFRESH) {
 			return;
 		}
-		// ÅĞ¶ÏÊÇ·ñ¹ö¶¯µ½µ×²¿
+		// åˆ¤æ–­æ˜¯å¦æ»šåŠ¨åˆ°åº•éƒ¨
 		boolean scrollEnd = false;
 		try {
 			if (view.getPositionForView(mAdapter.getFooterView()) == view.getLastVisiblePosition())
@@ -173,7 +173,7 @@ public class PreAcceptFragment extends BaseFragment
 
 		if (mState == STATE_NONE && scrollEnd) {
 
-			Log.d("TAG", "¼ÓÔØ¸ü¶à");
+			Log.d("TAG", "åŠ è½½æ›´å¤š");
 
 			if (mAdapter.getState() == ListBaseAdapter.STATE_LOAD_MORE
 					|| mAdapter.getState() == ListBaseAdapter.STATE_NETWORK_ERROR) {
@@ -202,14 +202,14 @@ public class PreAcceptFragment extends BaseFragment
 		/*
 		 * if (mResult != null && !mResult.OK()) {
 		 * AppContext.showToast(mResult.getErrorMessage()); //
-		 * ×¢ÏúµÇÂ½£¬ÃÜÂëÒÑ¾­ĞŞ¸Ä£¬cookie£¬Ê§Ğ§ÁË AppContext.getInstance().Logout(); }
+		 * æ³¨é”€ç™»é™†ï¼Œå¯†ç å·²ç»ä¿®æ”¹ï¼Œcookieï¼Œå¤±æ•ˆäº† AppContext.getInstance().Logout(); }
 		 */
 		// mErrorLayout.setErrorType(EmptyLayout.HIDE_LAYOUT);
 		if (mCurrentPage == 0) {
 			mAdapter.clear();
 		}
 		/*
-		 * ÅĞ¶ÏºÍÔ­ÏÈÊı¾İÊÇ·ñÏàÍ¬ for (int i = 0; i < data.size(); i++) { if
+		 * åˆ¤æ–­å’ŒåŸå…ˆæ•°æ®æ˜¯å¦ç›¸åŒ for (int i = 0; i < data.size(); i++) { if
 		 * (compareTo(mAdapter.getData(), data.get(i))) { data.remove(i); i--; }
 		 * }
 		 */
@@ -224,7 +224,7 @@ public class PreAcceptFragment extends BaseFragment
 		}
 		mAdapter.setState(adapterState);
 		mAdapter.addData(data);
-		// ÅĞ¶ÏµÈÓÚÊÇÒòÎª×îºóÓĞÒ»ÏîÊÇlistviewµÄ×´Ì¬
+		// åˆ¤æ–­ç­‰äºæ˜¯å› ä¸ºæœ€åæœ‰ä¸€é¡¹æ˜¯listviewçš„çŠ¶æ€
 		if (mAdapter.getCount() == 1) {
 
 			mAdapter.setState(ListBaseAdapter.STATE_EMPTY_ITEM);
@@ -238,7 +238,7 @@ public class PreAcceptFragment extends BaseFragment
 		return 3;
 	}
 
-	// Íê³ÉË¢ĞÂ
+	// å®Œæˆåˆ·æ–°
 	protected void executeOnLoadFinish() {
 		setSwipeRefreshLoadedState();
 		mState = STATE_NONE;

@@ -57,7 +57,7 @@ public abstract class BaseActivity extends Activity implements DialogControl, Vi
 
 	@Override
 	public WaitDialog showWaitDialog() {
-		return showWaitDialog("ÕıÔÚ¼ÓÔØ...");
+		return showWaitDialog("æ­£åœ¨åŠ è½½...");
 	}
 
 	@Override

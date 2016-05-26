@@ -55,19 +55,19 @@ public class OrderActivity extends BaseActivity {
 		@Override
 		public void onSuccess(int arg0, Header[] arg1, byte[] data) {
 			hideWaitDialog();
-			Toast.makeText(OrderActivity.this, "³É¹¦" + new String(data), 5 * 1000).show();
+			Toast.makeText(OrderActivity.this, "æˆåŠŸ" + new String(data), 5 * 1000).show();
 			startActivity(MainActivity.class);
 		}
 
 		@Override
 		public void onFailure(int arg0, Header[] arg1, byte[] data, Throwable arg3) {
 			hideWaitDialog();
-			Toast.makeText(OrderActivity.this, "Ê§°Ü" , 5 * 1000).show();
+			Toast.makeText(OrderActivity.this, "å¤±è´¥" , 5 * 1000).show();
 		}
 	};
 
 	/**
-	 * ´´½¨ÈÕÆÚ¼°Ê±¼äÑ¡Ôñ¶Ô»°¿ò
+	 * åˆ›å»ºæ—¥æœŸåŠæ—¶é—´é€‰æ‹©å¯¹è¯æ¡†
 	 */
 	@Override
 	protected Dialog onCreateDialog(int id) {
@@ -79,9 +79,9 @@ public class OrderActivity extends BaseActivity {
 				public void onDateSet(DatePicker dp, int year, int month, int dayOfMonth) {
 					dataTxt.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
 				}
-			}, c.get(Calendar.YEAR), // ´«ÈëÄê·İ
-					c.get(Calendar.MONTH), // ´«ÈëÔÂ·İ
-					c.get(Calendar.DAY_OF_MONTH) // ´«ÈëÌìÊı
+			}, c.get(Calendar.YEAR), // ä¼ å…¥å¹´ä»½
+					c.get(Calendar.MONTH), // ä¼ å…¥æœˆä»½
+					c.get(Calendar.DAY_OF_MONTH) // ä¼ å…¥å¤©æ•°
 			);
 			break;
 		case TIME_DIALOG:
@@ -120,7 +120,7 @@ public class OrderActivity extends BaseActivity {
 			
 			Log.d("TAG", "userId"+new SPUtil(this).getUserId());
 			params.put("userId", new SPUtil(this).getUserId());
-			params.put("extra_need", "¶îÍâ¿ìµİ");
+			params.put("extra_need", "é¢å¤–å¿«é€’");
 			params.put("type", type);
 			params.put("pay_type", "offline");
 			showWaitDialog();
@@ -149,14 +149,14 @@ public class OrderActivity extends BaseActivity {
 		nameTxt = (TextView) findViewById(R.id.order_txt_name);
 		phoneTxt = (TextView) findViewById(R.id.order_txt_phone);
 
-		// ³õÊ¼»¯ Ê±¼ä
+		// åˆå§‹åŒ– æ—¶é—´
 
 		SimpleDateFormat formatDate = new SimpleDateFormat("yy-MM-dd");
 		SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm");
 		dataTxt.setText(formatDate.format(date));
 		timeTxt.setText(formatTime.format(date));
 
-		// ³õÊ¼»¯ ĞÕÃû µç»°
+		// åˆå§‹åŒ– å§“å ç”µè¯
 		SPUtil spUtil = new SPUtil(this);
 		nameTxt.setText(spUtil.getUserName());
 		phoneTxt.setText(spUtil.getPhoneNumber());
@@ -165,7 +165,7 @@ public class OrderActivity extends BaseActivity {
 
 	@Override
 	public void initData() {
-		new ActionBarBuilder(this).setTitleText("·¢²¼¶©µ¥");
+		new ActionBarBuilder(this).setTitleText("å‘å¸ƒè®¢å•");
 		type = getIntent().getStringExtra(KEY_ORDER_TYPE);
 
 	}

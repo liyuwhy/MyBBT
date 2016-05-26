@@ -50,13 +50,13 @@ public class LoginActivity extends BaseActivity {
 					
 					
 					User user = User.parserToUser(jsonObject.getString(User.JSONMain).toString());
-					Toast.makeText(LoginActivity.this, "µÇÂ¼³É¹¦"+user.getHeadIcon(), Toast.LENGTH_SHORT).show();
+					Toast.makeText(LoginActivity.this, "ç™»å½•æˆåŠŸ"+user.getHeadIcon(), Toast.LENGTH_SHORT).show();
 					new SPUtil(LoginActivity.this).saveUserInfo(user);
 					
 				} else if (code.equals("101")) {
-					Toast.makeText(LoginActivity.this, "ÃÜÂë´íÎó", Toast.LENGTH_SHORT).show();
+					Toast.makeText(LoginActivity.this, "ç™»å½•å¤±è´¥", Toast.LENGTH_SHORT).show();
 				} else if (code.equals("102")) {
-					Toast.makeText(LoginActivity.this, "ÕËºÅ²»´æÔÚ", Toast.LENGTH_SHORT).show();
+					Toast.makeText(LoginActivity.this, "ç™»å½•å¤±è´¥", Toast.LENGTH_SHORT).show();
 				}
 
 			} catch (JSONException e) {
