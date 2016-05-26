@@ -43,7 +43,6 @@ public class RegisterActivity extends BaseActivity {
 			hideWaitDialog();
 			String jsonString = new String(data);
 			try {
-
 				JSONObject jsonObject = new JSONObject(jsonString);
 				String code = jsonObject.getString("code");
 				if (code.equals("200")) {

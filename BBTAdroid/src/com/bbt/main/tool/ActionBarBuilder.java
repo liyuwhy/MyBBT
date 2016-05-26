@@ -42,6 +42,13 @@ public class ActionBarBuilder {
 		return this;
 	}
 	
+	
+	public ActionBarBuilder setLeftToMore(OnClickListener onClickListener){
+		leftImg.setBackgroundResource(R.drawable.icon_sliding);
+		leftImg.setOnClickListener(onClickListener);
+		return this;
+	}
+	
 	public ActionBarBuilder setTitleText(String title){
 		centerTxt.setText(title);
 		return this;

@@ -36,6 +36,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -78,7 +79,13 @@ public class MainActivity extends SlidingFragmentActivity {
 
 		initFragment(savedInstanceState);
 		// initUserInfo();
-		new ActionBarBuilder(this).setLeftGone().setTitleText("帮帮堂");
+		new ActionBarBuilder(this).setLeftToMore(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mSlidingMenu.toggle();
+			}
+		}).setTitleText("帮帮堂");
 		// 初始化默认图片
 		// getDefaultImgHead();
 	}

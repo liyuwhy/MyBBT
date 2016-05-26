@@ -166,6 +166,8 @@ public class OrderActivity extends BaseActivity {
 	@Override
 	public void initData() {
 		new ActionBarBuilder(this).setTitleText("发布订单");
+		
+		
 		type = getIntent().getStringExtra(KEY_ORDER_TYPE);
 
 	}
